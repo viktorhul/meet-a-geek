@@ -5,7 +5,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 .profilePic{
     width: 20%;
     float: left;
