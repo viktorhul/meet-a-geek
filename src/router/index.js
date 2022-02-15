@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import EventID from '../views/EventID.vue'
-
+import Endscreen from '../views/Endscreen.vue'
+import Datescreen from '../views/Datescreen.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,6 +33,16 @@ const routes = [
     path: '/eventid',
     name: 'EventID',
     component: EventID
+  },
+  {
+    path: '/endscreen',
+    name: 'Endscreen',
+    component: Endscreen
+  },
+  {
+    path: '/datescreen',
+    name: 'Datescreen',
+    component: Datescreen
   }
 ]
 
