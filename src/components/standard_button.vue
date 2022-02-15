@@ -1,5 +1,5 @@
 <template>
-  <button @click.prevent="$emit('click')">
+  <button @click.prevent="$emit('click')" :disabled="disable">
     <slot></slot>
   </button>
 </template>
@@ -22,5 +22,7 @@ export default {
 
 <style scoped>
 button {
+  /* background-color: blue; */
 }
 </style>
+
