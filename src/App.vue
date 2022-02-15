@@ -3,14 +3,16 @@
     <div class="devBox">
       <h2>Bigboy Links</h2>
       <ul>
-        <li><router-link to="/home">Login</router-link></li>
-        <li><router-link to="/about">About</router-link></li>
+        <li><router-link to="/">Login</router-link></li>
         <li><router-link to="/eventid">EventID</router-link></li>
         <li><router-link to="/endscreen">Endscreen</router-link></li>
         <li><router-link to="/Datescreen">Datescreen</router-link></li>
         <li><router-link to="/Admin">Admin</router-link></li>
         <li><router-link to=""></router-link></li>
         <li><router-link to=""></router-link></li>
+        <li><router-link to="geekreview">geekreview</router-link></li>
+
+
       </ul>
     </div>
     <router-view />
