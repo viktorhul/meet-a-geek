@@ -8,6 +8,9 @@
         <li><router-link to="/eventid">EventID</router-link></li>
         <li><router-link to=""></router-link></li>
         <li><router-link to=""></router-link></li>
+        <li><router-link to="geekreview">geekreview</router-link></li>
+
+
       </ul>
     </div>
     <router-view />
