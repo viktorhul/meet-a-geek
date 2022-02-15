@@ -1,10 +1,38 @@
 <template>
   <div id="app">
+    <div class="devBox">
+      <h2>Bigboy Links</h2>
+      <ul>
+        <li><router-link to="/home">Login</router-link></li>
+        <li><router-link to="/about">About</router-link></li>
+        <li><router-link to="/eventid">EventID</router-link></li>
+        <li><router-link to=""></router-link></li>
+        <li><router-link to=""></router-link></li>
+      </ul>
+    </div>
     <router-view />
   </div>
 </template>
 
 <style>
+.devBox {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  top: 0;
+  left: 0;
+  text-align: left;
+  padding: 10px;
+}
+
+.devBox h2 {
+  font-size: 12pt;
+  padding: 0;
+  margin: 0;
+}
+
 * {
   box-sizing: border-box;
 }
