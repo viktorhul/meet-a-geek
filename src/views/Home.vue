@@ -65,7 +65,7 @@ export default {
         this.invalidInput = true;
       } else if (this.checkCredentials(this.username, this.password)) {
         // TODO: LOGIN CREDENTIALS ARE CORRECT -> CONTINUE
-        this.invalidInput = false;
+        this.$router.push("/eventid");
       } else {
         this.errorMessage = "Login credentials are incorrect";
         this.invalidInput = true;
