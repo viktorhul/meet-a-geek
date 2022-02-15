@@ -11,7 +11,9 @@
       minlength="4"
     />
     <br /><br />
-    <standard_button @click="clickAction" :disable="!validInputData">Login</standard_button>
+    <standard_button @click="clickAction" :disable="!validInputData"
+      >Login</standard_button
+    >
   </div>
 </template>
 
@@ -23,15 +25,11 @@ export default {
   },
   methods: {
     clickAction() {
-      //Explain pls
       this.$router.push("/endscreen");
     },
     checkLength() {
       console.log(this.id.length);
       return (this.validInputData = this.id.length > 3);
-      // if (this.id.length>2){
-      //   this.validInputData="true";
-      // }
     },
   },
   data() {
