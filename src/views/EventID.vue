@@ -11,8 +11,6 @@
       minlength="4"
     />
     <br /><br />
-    <!-- <standard_button @click="clickAction" disable="!validInputData">Login</standard_button> -->
-
     <standard_button @click="clickAction" :disable="!validInputData">Login</standard_button>
   </div>
 </template>
