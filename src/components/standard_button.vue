@@ -1,6 +1,6 @@
 <template>
-  <button >
-    Yes/No
+  <button @click.prevent="$emit('click')">
+    <slot></slot>
   </button>
 </template>
 
@@ -8,21 +8,19 @@
 export default {
   props: {
     color: {
-      type: String
+      type: String,
     },
     background: {
-      type: String
+      type: String,
     },
     disable: {
-      type: Boolean
-    }
-    }
-  }
+      type: Boolean,
+    },
+  },
+};
 </script>
 
 <style scoped>
 button {
-
 }
-
 </style>
