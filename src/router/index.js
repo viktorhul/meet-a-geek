@@ -5,6 +5,7 @@ import EventID from '../views/EventID.vue'
 import Endscreen from '../views/Endscreen.vue'
 import Datescreen from '../views/Datescreen.vue'
 import Admin from '../views/Admin.vue'
+import Loading from '../views/Loading.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -49,6 +50,11 @@ const routes = [
     path: '/admin',
     name: 'Admin',
     component: Admin
+  },
+  {
+    path: '/loading',
+    name: 'Loading',
+    component: Loading
   }
 ]
 
