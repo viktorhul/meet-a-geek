@@ -31,7 +31,7 @@
     <br>
     <h5>Question 4</h5>
     <div>
-      <standard_button>YES</standard_button>
+      <standard_button style="">YES </standard_button>
       <standard_button>NO</standard_button>
     </div>
     <br>
@@ -53,7 +53,7 @@ export default {
   methods: {
     onDone(){
       //Server push information...
-      this.$router.push("/");
+      this.$router.push("/loading");
     }
 
   }
