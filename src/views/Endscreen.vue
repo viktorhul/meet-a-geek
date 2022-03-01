@@ -2,21 +2,21 @@
   <div class="EventOverTitle">
     <h1>Event Over!</h1>
     <h2>Matches:</h2>
-    <UserCard />
+    <UserCard_Match />
     <br>
-    <UserCard />
+    <UserCard_Match />
     <br>
-    <UserCard />
+    <UserCard_Match />
     <br>
   </div>
 </template>
 
 <script>
-import UserCard from "@/components/UserCard.vue";
+import UserCard_Match from "@/components/UserCard_Match.vue";
 
 export default{
     components:{
-        UserCard,
+        UserCard_Match,
     }
     
 }
