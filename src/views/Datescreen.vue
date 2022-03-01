@@ -3,7 +3,9 @@
     <header class="DateHeader" @click="nextDate()">Date: {{DateNr}}</header>
     <h1>MATCH FOUND!</h1>
     <!-- <UserProfileMatch /> -->
-    <randomprofile />
+ eventidFunc
+    <UserCard />
+main
 
     <MoveToTable @TableClicked="startTimer()" v-if="DateRun === false"/>
     <CountdownTimer v-else/>
@@ -13,7 +15,9 @@
 <script>
 import MoveToTable from "@/components/MoveToTable.vue";
 import CountdownTimer from "@/components/CountdownTimer.vue"
-import randomprofile from "@/components/randomprofile.vue"
+eventidFunc
+import UserCard from "@/components/UserCard";
+main
 export default{
     data(){
         return{
@@ -22,9 +26,10 @@ export default{
         }
     },
     components:{
+        UserCard,
         MoveToTable,
         CountdownTimer,
-        randomprofile,
+main
     },
     methods:{
   
