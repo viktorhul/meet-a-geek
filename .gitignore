@@ -1,2 +1,5 @@
 node_modules/*
 .idea/inspectionProfiles/Project_Default.xml
+backend/node_modules/*
+package-lock.json
+backend/package-lock.json
