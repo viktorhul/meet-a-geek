@@ -9,6 +9,7 @@ app.use(express.json())
 let users = [
     {
         username: 'bigboy',
+        fullname: 'Bengt Bauhaus',
         password: 'bigboy',
         gender: 'male',
         language: 'c',
@@ -83,6 +84,13 @@ app.post('/create-account', (req, res) => {
 
     return res.json({ created: true })
 
+})
+
+app.get('/participants', (req, res) => {
+    res.json({
+        ok: true,
+        participants: users
+    })
 })
 
 app.listen(3000, () => {
