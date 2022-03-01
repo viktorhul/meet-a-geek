@@ -10,7 +10,7 @@
         <li><router-link to="/Datescreen">Datescreen</router-link></li>
         <li><router-link to="/Admin">Admin</router-link></li>
         <li><router-link to="/Loading">loading</router-link></li>
-        <li><router-link to=""></router-link></li>
+        <li><router-link to="/create-account">Create Account</router-link></li>
         <li><router-link to=""></router-link></li>
         <li><router-link to="geekreview">geekreview</router-link></li>
 
