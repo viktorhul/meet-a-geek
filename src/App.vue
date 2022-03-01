@@ -80,4 +80,13 @@ body {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+/* STYLE SHEET  */
+/* #362706 */Darkest
+/* #464E2E */
+/* #ACB992 */
+/* #E9E5D6 */light
+html,{
+  background-color: #E9E5D6;
+}
 </style>
