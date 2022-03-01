@@ -12,10 +12,11 @@
         <li><router-link to=""></router-link></li>
         <li><router-link to=""></router-link></li>
         <li><router-link to="geekreview">geekreview</router-link></li>
-
       </ul>
     </div>
-    <router-view />
+    <div id="viewport">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -23,7 +24,7 @@
 .devBox {
   position: absolute;
   width: 200px;
-  height: 200px;
+  min-height: 200px;
   border: 1px solid #ccc;
   background-color: #eee;
   top: 0;
@@ -45,16 +46,21 @@
 html,
 body {
   margin: 0;
+  background-color: blue;
 }
 
 #app {
+  background-color: blue;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+#viewport {
+  margin: 0 auto;
   width: 500px;
-  margin: 50px auto;
 }
 
 #nav {
