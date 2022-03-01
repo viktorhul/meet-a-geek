@@ -47,11 +47,11 @@
 html,
 body {
   margin: 0;
-  background-color: blue;
+  background-color: lightblue;
 }
 
 #app {
-  background-color: blue;
+  background-color: lightblue;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
