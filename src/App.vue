@@ -86,7 +86,10 @@ body {
 /* #464E2E */
 /* #ACB992 */
 /* #E9E5D6 */light
-html,{
-  background-color: #E9E5D6;
+body,div{
+  background-color:#E9E5D6;
+}
+h1,h2,h3{
+
 }
 </style>
