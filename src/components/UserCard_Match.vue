@@ -4,11 +4,7 @@
     <img src="https://placebeard.it/640x360" alt="John" style="width:100%" class="avatar2" >
     </div>
     <h2>Viking Dude</h2>
-    <p class="title">Some cool anekdote or statement</p>
-    <h4>Location:</h4>
-    <p>Woods of sweeden</p>
-    <h3>Some other information...</h3>
-    <p>Pretends to be a GamerGirls sometimes...</p>
+
   </div>
 </template>
 

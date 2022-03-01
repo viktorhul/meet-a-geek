@@ -1,4 +1,5 @@
 <template>
+
   <div id="app">
     <div class="devBox">
       <h2>Bigboy Links</h2>
