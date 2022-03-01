@@ -51,6 +51,7 @@ main
 /* #362706 */
 /* #464E2E */
 /* #ACB992 */
+/* #ACB992 */
 /* #E9E5D6  light */
 html,
 body {
@@ -68,7 +69,7 @@ body {
   color: #2c3e50;
 }
 
-h1,h2,h3,h4,p{
+h1,h2,h3,h4,h5,p{
   color: #362706;
 }
 
