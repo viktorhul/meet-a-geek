@@ -24,7 +24,6 @@ export default {
 }
 
 .title {
-  color: grey;
   font-size: 18px;
 }
 
