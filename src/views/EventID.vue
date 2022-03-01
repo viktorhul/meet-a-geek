@@ -33,9 +33,6 @@ this.wrongPassword = true;
       setTimeout(() => {
         this.wrongPassword= false; this.id = "";true
       }, 1000);
-      console.log("TITTA HIT");
-      //this.wrongPassword = false;
-      // this.id=""
     },
     checkLength() {
       console.log(this.id.length);
