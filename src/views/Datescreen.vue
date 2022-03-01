@@ -3,9 +3,7 @@
     <header class="DateHeader" @click="nextDate()">Date: {{DateNr}}</header>
     <h1>MATCH FOUND!</h1>
     <!-- <UserProfileMatch /> -->
- eventidFunc
     <UserCard />
-main
 
     <MoveToTable @TableClicked="startTimer()" v-if="DateRun === false"/>
     <CountdownTimer v-else/>

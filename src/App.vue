@@ -45,20 +45,30 @@
   box-sizing: border-box;
 }
 
+/* STYLE SHEET  */
+/* #362706 */
+/* #464E2E */
+/* #ACB992 */
+/* #ACB992 */
+/* #E9E5D6  light */
 html,
 body {
   margin: 0;
-  background-color: lightblue;
+  background-color:#E9E5D6; 
 }
 
 #app {
-  background-color: lightblue;
 
+  background-color:#E9E5D6;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+h1,h2,h3,h4,h5,p{
+  color: #362706;
 }
 
 #viewport {
@@ -78,4 +88,11 @@ body {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+/* STYLE SHEET  */
+/* #362706      Darkest */
+/* #464E2E */
+/* #ACB992 */
+/* #E9E5D6  light */
+
 </style>

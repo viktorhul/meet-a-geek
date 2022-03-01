@@ -25,6 +25,9 @@
   text-align: center;
 }
 
+.title {
+  font-size: 18px;
+}
 
 .fa {
   padding: 20px;

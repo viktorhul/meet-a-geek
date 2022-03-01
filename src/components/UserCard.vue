@@ -1,5 +1,6 @@
 <template>
   <div class="card">
+      <br>
     <div class="image-cropper">
       <img src="https://placebeard.it/640x360" alt="profile pic" class="avatar" >
     </div>
@@ -20,6 +21,8 @@ export default {
 
 <style scoped>
 .card {
+    /* THIS NEED TO CHANGE */
+  background-color: #ACB992;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 300px;
   border-radius: 10%;
@@ -36,7 +39,7 @@ export default {
 }
 
 .title {
-  color: grey;
+  /* color: grey; */
   font-size: 18px;
 }
 
