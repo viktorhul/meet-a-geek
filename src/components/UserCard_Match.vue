@@ -1,54 +1,49 @@
 <template>
   <div class="card">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <div class="image-cropper">
     <img src="https://placebeard.it/640x360" alt="John" style="width:100%" class="avatar2" >
-    </div>
-    <h2>Viking Dude</h2>
-    <div class="links">
-    <a href="#" class="fa fa-facebook" @click="facebook"></a>
-    <a href="#" class="fa fa-linkedin" @click="lin"></a>
-    <a href="#" class="fa fa-twitter" @click="twitter"></a>
-  </div>
+      <h2>Contact information:</h2>
+      <div align="left">
+        <h5 >Name: Viking Dude</h5>
+        <h5>Email: Viking.Dude@solaris.com</h5>
+        <h5>Phone: 112</h5>
+      </div>
     <br>
-
+    <div>
+      <h2>Socials:</h2>
+      <div class="links">
+        <a href="http://www.facebook.com" class="fa fa-facebook"></a>
+        <a href="http://www.linkedin.com" class="fa fa-linkedin" ></a>
+        <a href="http://www.twitter.com" class="fa fa-twitter"></a>
+      </div>
+    </div>
+    <br>
   </div>
 </template>
 
 <script>
-export default {
-methods: {
-    facebook() {
-      //Server push information...
-      this.$router.push("/loading");
 
-    },
-    instagram() {
-      //Server push information...
-      this.$router.push("/loading");
-
-    },
-    twitter() {
-      //Server push information...
-      this.$router.push("/loading");
-
-    }
-  }
-}
 </script>
 
 <style scoped>
 .card {
+  /* THIS NEED TO CHANGE */
+  background-color: #ACB992;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 300px;
-  border-radius: 5%;
+  border-radius: 10%;
   margin: auto;
   text-align: center;
 }
+.avatar2 {
 
-.title {
-  font-size: 18px;
+  vertical-align: middle;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 7px solid lightgray;
 }
+
 
 /* Style all font awesome icons */
 .fa {
@@ -68,19 +63,16 @@ methods: {
 
 /* Facebook */
 .fa-facebook {
-  background: #3B5998;
-  color: white;
+  color: #362706;
 }
 
 /* Twitter */
 .fa-twitter {
-  background: #55ACEE;
-  color: white;
+  color: #362706;
 }
 /* Linked in */
 .fa-linkedin {
-  background: #007bb5;
-  color: white;
+  color: #362706;
 }
 
 a {
@@ -91,13 +83,6 @@ a {
 
 button:hover, a:hover {
   opacity: 0.7;
-}
-
-.avatar2 {
-  padding-top: 3px;
-  size: auto;
-  border-radius: 5%;
-  border: 2px;
 }
 
 
