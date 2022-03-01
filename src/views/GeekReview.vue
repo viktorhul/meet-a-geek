@@ -1,13 +1,14 @@
 <template>
-  <div class="geekreview">
+  <div class="background">
+  <div class="geekreview" >
     <h1>Geek Review</h1>
     <div>
-      <randomprofile></randomprofile>
+      <UserCard></UserCard>
     </div>
     <br>
     <h2>Meet again? 1</h2>
     <div>
-      <standard_button>YES</standard_button>
+      <standard_button class="buttonStyle">YES</standard_button>
       <standard_button>NO</standard_button>
     </div>
     <br>
@@ -41,19 +42,22 @@
     </div>
     <br>
   </div>
-
+  </div>
 </template>
 
 <script>
 import standard_button from "@/components/standard_button";
-import randomprofile from "@/components/randomprofile";
+import UserCard from "@/components/UserCard";
 export default {
   name: "GeekReview",
-  components: {standard_button,randomprofile},
+  components: {standard_button,UserCard},
   methods: {
     onDone(){
       //Server push information...
       this.$router.push("/loading");
+    },
+    changeColorOnClick(){
+
     }
 
   }
@@ -62,4 +66,7 @@ export default {
 
 <style scoped>
 
+button:hover, a:hover {
+  color: red;
+}
 </style>
