@@ -46,11 +46,11 @@
 html,
 body {
   margin: 0;
-  background-color: blue;
+  background-color: #eaf2f8;
 }
 
 #app {
-  background-color: blue;
+  background-color: #eaf2f8;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
