@@ -1,17 +1,19 @@
 <template>
   <div class="card">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="image-cropper">
     <img src="https://placebeard.it/640x360" alt="John" style="width:100%" class="avatar2" >
     </div>
     <h2>Viking Dude</h2>
+    <a href="#" class="fa fa-facebook"></a>
+    <a href="#" class="fa fa-twitter"></a>
+    <a href="#" class="fa fa-instagram"></a>
 
   </div>
 </template>
 
 <script>
 
-export default {
-}
 </script>
 
 <style scoped>
@@ -23,22 +25,14 @@ export default {
   text-align: center;
 }
 
-.title {
-  color: grey;
-  font-size: 18px;
-}
 
-button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 30px;
   text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
+  text-decoration: none;
+  border-radius: 50%;
 }
 
 a {

@@ -13,9 +13,7 @@
         <li><router-link to=""></router-link></li>
         <li><router-link to=""></router-link></li>
         <li><router-link to="geekreview">geekreview</router-link></li>
-eventidFunc
 
-main
       </ul>
     </div>
     <div id="viewport">
