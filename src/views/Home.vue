@@ -3,7 +3,10 @@
     <h1>Meet-a-geek.com</h1>
     <p>Are you a geek? Can't get laid? Look no further!</p>
     <p>Sign in or create an account to continue.</p>
-    <form>
+    <div v-if="loginPending">
+      <p><center>Logging in...</center></p>
+    </div>
+    <form v-else>
       <div v-if="invalidInput" class="error">{{ errorMessage }}</div>
       <div class="inputField">
         <label for="username">Username</label>
@@ -42,6 +45,7 @@ export default {
   components: {},
   data() {
     return {
+      loginPending: false,
       username: "",
       password: "",
       invalidInput: false,
@@ -54,21 +58,37 @@ export default {
       return (this.validInputData =
         this.username.length > 0 && this.password.length > 0);
     },
-    checkCredentials(user, pass) {
-      // TODO: CHECK USER CREDENTIALS
-      return user === "viktor" && pass === "wow";
+    async checkCredentials() {
+      fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: this.username,
+          password: this.password,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.access === true) {
+            console.log(data);
+            this.$router.push("/eventid");
+          } else {
+            this.loginPending = false;
+            this.errorMessage = "Login credentials are incorrect";
+            this.invalidInput = true;
+          }
+        });
     },
 
     login() {
+      this.loginPending = true;
       if (!this.checkInputValues()) {
         this.errorMessage = "Username and password fields cannot be empty";
         this.invalidInput = true;
-      } else if (this.checkCredentials(this.username, this.password)) {
-        // TODO: LOGIN CREDENTIALS ARE CORRECT -> CONTINUE
-        this.$router.push("/eventid");
       } else {
-        this.errorMessage = "Login credentials are incorrect";
-        this.invalidInput = true;
+        this.checkCredentials();
       }
     },
   },

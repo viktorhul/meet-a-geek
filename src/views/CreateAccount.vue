@@ -1,7 +1,11 @@
 <template>
   <div>
     <h1>Create a new account</h1>
-    <form>
+    <div v-if="formComplete">
+      <h2>Woho! Your account is created!</h2>
+      <p>You will be directed to the login page shortly.</p>
+    </div>
+    <form v-else>
       <div class="inputField">
         <label for="username"
           >Username
@@ -56,7 +60,6 @@
         >
         <select
           name="language"
-          id=""
           :class="{
             form_valid: language.valid,
             form_invalid: !language.valid && !language.empty,
@@ -82,7 +85,6 @@
         >
         <select
           name="wow"
-          id=""
           :class="{
             form_valid: wow.valid,
             form_invalid: !wow.valid && !wow.empty,
@@ -98,11 +100,50 @@
           <option value="4">900 or more</option>
         </select>
       </div>
+
+      <div class="inputField">
+        <label for="gender"
+          >Gender
+          <span style="color: red" v-if="!gender.valid">{{
+            gender.errorMsg
+          }}</span></label
+        >
+        <select
+          name="gender"
+          :class="{
+            form_valid: gender.valid,
+            form_invalid: !gender.valid && !gender.empty,
+          }"
+          @mousedown="checkGender"
+          @change="checkGender"
+          v-model="gender.value"
+        >
+          <option value="" disabled selected>Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="centaur">Centaur</option>
+        </select>
+      </div>
+
+      <div class="inputField">
+        <label for="picture"
+          >Picture
+          <span style="color: red" v-if="!picture.valid">{{
+            picture.errorMsg
+          }}</span></label
+        >
+        <input type="file" disabled />
+      </div>
+
       <button
         class="create"
         @click.prevent="createAccount"
         :disabled="
-          !username.valid || !password.valid || !language.valid || !wow.valid
+          !username.valid ||
+          !password.valid ||
+          !language.valid ||
+          !wow.valid ||
+          !gender.valid
         "
       >
         Create account
@@ -115,6 +156,7 @@
 export default {
   data() {
     return {
+      formComplete: false,
       username: {
         valid: false,
         errorMsg: "",
@@ -139,6 +181,18 @@ export default {
         value: "",
         empty: true,
       },
+      gender: {
+        valid: false,
+        errorMsg: "",
+        value: "",
+        empty: true,
+      },
+      picture: {
+        valid: false,
+        errorMsg: "This is a VIP only feature",
+        value: "",
+        empty: false,
+      },
       occupiedUsers: ["viktor", "jonas", "oscar", "albin", "ian", "bigboy"],
     };
   },
@@ -161,7 +215,6 @@ export default {
     checkPassword() {
       this.password.empty = false;
       if (this.password.value.length <= 7) {
-        console.log(this.password.value.length);
         this.password.valid = false;
         this.password.errorMsg =
           "The password has to be at least eight characters long";
@@ -182,7 +235,6 @@ export default {
       }
     },
     checkWow() {
-      console.log("wow");
       this.wow.empty = false;
 
       if (this.wow.value == "") {
@@ -191,28 +243,38 @@ export default {
         this.wow.valid = true;
       }
     },
+    checkGender() {
+      this.gender.empty = false;
+
+      if (this.gender.value == "") {
+        this.gender.valid = false;
+      } else if (this.gender.value == "centaur") {
+        this.gender.errorMsg = "How did you get in here?";
+        this.gender.valid = false;
+      } else {
+        this.gender.valid = true;
+      }
+    },
     createAccount() {
-      this.$router.push("/login");
       fetch("http://localhost:3000/create-account", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: this.username,
-          password: this.password,
-          language: this.language,
-          wow: this.wow,
+          username: this.username.value,
+          password: this.password.value,
+          language: this.language.value,
+          wow: this.wow.value,
         }),
       })
         .then((res) => res.json())
         .then((data) => {
-          // handle data
-          console.log(data);
-          let wasCreated = true;
-          if (wasCreated) {
-            // Account was created
-            this.$router.push("/eventid");
+          if (data["created"] == true) {
+            this.formComplete = true;
+            setTimeout(() => {
+              this.$router.push("/");
+            }, 4000);
           }
         });
     },
@@ -261,7 +323,8 @@ h1 {
 
 .inputField input[type="text"],
 .inputField input[type="password"],
-.inputField select {
+.inputField select,
+.inputField input[type="file"] {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
