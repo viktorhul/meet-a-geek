@@ -1,4 +1,5 @@
 <template>
+
   <div class="background">
   <div class="geekreview" >
     <h1>Geek Review</h1>
@@ -38,6 +39,7 @@
     <br>
     <h5>Q5: Did the geek behave, and look, in accordance with his profile?</h5>
     <div>
+
       <standard_button>YES</standard_button>
       <standard_button>NO</standard_button>
     </div>
@@ -61,9 +63,9 @@ export default {
     onDone(){
       //Server push information...
       this.$router.push("/loading");
+
     },
     changeColorOnClick(){
-
     }
 
   }
