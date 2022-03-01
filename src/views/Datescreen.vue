@@ -15,9 +15,7 @@ main
 <script>
 import MoveToTable from "@/components/MoveToTable.vue";
 import CountdownTimer from "@/components/CountdownTimer.vue"
-eventidFunc
 import UserCard from "@/components/UserCard";
-main
 export default{
     data(){
         return{
@@ -29,7 +27,6 @@ export default{
         UserCard,
         MoveToTable,
         CountdownTimer,
-main
     },
     methods:{
   

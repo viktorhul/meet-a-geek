@@ -3,7 +3,9 @@
     <h1>Event Over!</h1>
     <h2>Matches:</h2>
     <UserCard />
+    <br>
     <UserCard />
+    <br>
     <UserCard />
   </div>
 </template>
