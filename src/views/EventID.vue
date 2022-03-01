@@ -10,8 +10,8 @@
       maxlength="4"
       minlength="4"
     />
-    <div v-if="wrongPassword"><p>HEJEHJE</p></div>
-    <br /><br />
+    <div v-if="wrongPassword" style="color: red;"><p>Invalid ID</p></div>
+    <div v-else><p><br></p></div>
     <standard_button @click="clickAction" :disable="!validInputData"
       >Login</standard_button
     >
@@ -27,14 +27,14 @@ export default {
   methods: {
     clickAction() {
       if (this.checkIfValidId(this.id)) {
-        this.$router.push("/endscreen");
+        this.$router.push("/Loading");
       }
 this.wrongPassword = true;
       setTimeout(() => {
-        this.id = "";true
-      }, 2000);
+        this.wrongPassword= false; this.id = "";true
+      }, 1000);
       console.log("TITTA HIT");
-      this.wrongPassword = false;
+      //this.wrongPassword = false;
       // this.id=""
     },
     checkLength() {
