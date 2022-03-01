@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Do ye wanna create an account?</h1>
-    <h2>Ye filthy singular nerd</h2>
+    <h1>Create a new account</h1>
     <form>
       <div class="inputField">
         <label for="username"
@@ -12,6 +11,7 @@
         </label>
         <input
           autocomplete="off"
+          @mousedown="checkUsername"
           @keyup="checkUsername"
           @change="checkUsername"
           :class="{
@@ -33,7 +33,9 @@
           }}</span>
         </label>
         <input
+          @mousedown="checkPassword"
           @keyup="checkPassword"
+          @change="checkPassword"
           :class="{
             form_valid: password.valid,
             form_invalid: !password.valid && !password.empty,
@@ -47,7 +49,7 @@
 
       <div class="inputField">
         <label for="language"
-          >What's ye favorite language?
+          >Favorite Language
           <span style="color: red" v-if="!language.valid">{{
             language.errorMsg
           }}</span></label
@@ -59,22 +61,49 @@
             form_valid: language.valid,
             form_invalid: !language.valid && !language.empty,
           }"
-          @click="checkLanguage"
+          @mousedown="checkLanguage"
           @change="checkLanguage"
           v-model="language.value"
         >
           <option value="" disabled selected>Favorite Language</option>
           <option value="c">C</option>
           <option value="java">Java</option>
-          <option value="haskell">Haskell</option>
           <option value="english">English</option>
-          <option value="sex">I communicate through sexual contact</option>
+          <option value="haskell">Haskell</option>
+        </select>
+      </div>
+
+      <div class="inputField">
+        <label for="wow"
+          >World of Warcraft Item Level
+          <span style="color: red" v-if="!wow.valid">{{
+            wow.errorMsg
+          }}</span></label
+        >
+        <select
+          name="wow"
+          id=""
+          :class="{
+            form_valid: wow.valid,
+            form_invalid: !wow.valid && !wow.empty,
+          }"
+          @mousedown="checkWow"
+          @change="checkWow"
+          v-model="wow.value"
+        >
+          <option value="" disabled selected>Item Level</option>
+          <option value="1">99 or less</option>
+          <option value="2">100-299</option>
+          <option value="3">300-899</option>
+          <option value="4">900 or more</option>
         </select>
       </div>
       <button
         class="create"
         @click.prevent="createAccount"
-        :disabled="!username.valid || !password.valid || !language.valid"
+        :disabled="
+          !username.valid || !password.valid || !language.valid || !wow.valid
+        "
       >
         Create account
       </button>
@@ -104,16 +133,22 @@ export default {
         value: "",
         empty: true,
       },
+      wow: {
+        valid: false,
+        errorMsg: "",
+        value: "",
+        empty: true,
+      },
       occupiedUsers: ["viktor", "jonas", "oscar", "albin", "ian", "bigboy"],
     };
   },
   methods: {
     checkUsername() {
       this.username.empty = false;
-      if (this.username.value.length <= 3) {
+      if (this.username.value.length <= 2) {
         this.username.valid = false;
         this.username.errorMsg =
-          "The username has to be at least four characters long";
+          "The username has to be at least three characters long";
       } else if (
         this.occupiedUsers.includes(this.username.value.toLowerCase())
       ) {
@@ -125,11 +160,11 @@ export default {
     },
     checkPassword() {
       this.password.empty = false;
-      if (this.password.value.length <= 127) {
+      if (this.password.value.length <= 7) {
         console.log(this.password.value.length);
         this.password.valid = false;
         this.password.errorMsg =
-          "The password is too weak. Make sure it has at least 128 unique characters";
+          "The password has to be at least eight characters long";
       } else {
         this.password.valid = true;
       }
@@ -137,16 +172,49 @@ export default {
     checkLanguage() {
       this.language.empty = false;
 
-      if (this.language.value == "haskell") {
-        this.language.errorMsg = "Get the fuck out";
+      if (this.language.value == "") {
+        this.language.valid = false;
+      } else if (this.language.value == "haskell") {
+        this.language.errorMsg = "This is not a valid option";
         this.language.valid = false;
       } else {
         this.language.valid = true;
       }
     },
+    checkWow() {
+      console.log("wow");
+      this.wow.empty = false;
+
+      if (this.wow.value == "") {
+        this.wow.valid = false;
+      } else {
+        this.wow.valid = true;
+      }
+    },
     createAccount() {
-      console.log("wow!");
-      console.log(this.language.value);
+      this.$router.push("/login");
+      fetch("http://localhost:3000/create-account", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: this.username,
+          password: this.password,
+          language: this.language,
+          wow: this.wow,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // handle data
+          console.log(data);
+          let wasCreated = true;
+          if (wasCreated) {
+            // Account was created
+            this.$router.push("/eventid");
+          }
+        });
     },
   },
 };
