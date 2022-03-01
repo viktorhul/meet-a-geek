@@ -1,4 +1,5 @@
 <template>
+
   <div id="app">
     <div class="devBox">
       <h2>Bigboy Links</h2>
@@ -12,6 +13,9 @@
         <li><router-link to="/create-account">Create Account</router-link></li>
         <li><router-link to=""></router-link></li>
         <li><router-link to="geekreview">geekreview</router-link></li>
+eventidFunc
+
+main
       </ul>
     </div>
     <div id="viewport">
@@ -43,19 +47,30 @@
   box-sizing: border-box;
 }
 
+/* STYLE SHEET  */
+/* #362706 */
+/* #464E2E */
+/* #ACB992 */
+/* #ACB992 */
+/* #E9E5D6  light */
 html,
 body {
   margin: 0;
-  background-color: #eaf2f8;
+  background-color:#E9E5D6; 
 }
 
 #app {
-  background-color: #eaf2f8;
+
+  background-color:#E9E5D6;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+h1,h2,h3,h4,h5,p{
+  color: #362706;
 }
 
 #viewport {
@@ -75,4 +90,11 @@ body {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+/* STYLE SHEET  */
+/* #362706      Darkest */
+/* #464E2E */
+/* #ACB992 */
+/* #E9E5D6  light */
+
 </style>
