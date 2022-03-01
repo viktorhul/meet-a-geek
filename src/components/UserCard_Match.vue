@@ -1,7 +1,8 @@
 <template>
   <div class="card">
+    <br>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <img src="https://placebeard.it/640x360" alt="John" style="width:100%" class="avatar2" >
+    <img src="https://placebeard.it/640x360" alt="John" class="avatar2" style="margin: 0 auto" >
       <h2>Contact information:</h2>
       <div align="left">
         <h5 >Name: Viking Dude</h5>
@@ -38,6 +39,7 @@
 .avatar2 {
 
   vertical-align: middle;
+
   width: 150px;
   height: 150px;
   border-radius: 50%;
