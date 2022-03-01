@@ -1,4 +1,5 @@
 <template>
+
   <div id="app">
     <div class="devBox">
       <h2>Bigboy Links</h2>
@@ -46,11 +47,12 @@
 html,
 body {
   margin: 0;
-  background-color: #eaf2f8;
+  background-color: lightblue;
 }
 
 #app {
-  background-color: #eaf2f8;
+  background-color: lightblue;
+
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
