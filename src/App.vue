@@ -56,6 +56,7 @@ body {
 }
 
 #app {
+  margin-top: 50px;
   background-color: #e9e5d6;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
