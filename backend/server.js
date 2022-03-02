@@ -21,7 +21,8 @@ let users = [
         language: 'c',
         wow: 2,
         participant: true,
-        picture: 'https://www.barncancerfonden.se/contentassets/7d3f1c95a98247b5b52eb708c1fad03c/bauhus-720x405.png'
+        picture: 'https://www.barncancerfonden.se/contentassets/7d3f1c95a98247b5b52eb708c1fad03c/bauhus-720x405.png',
+        location: 'Moms basement'
     }
 ]
 
@@ -40,8 +41,10 @@ async function fetchUser(gender, num) {
                     language: languages[Math.floor(Math.random() * languages.length)],
                     wow: wow[Math.floor(Math.random() * wow.length)],
                     participant: true,
-                    picture: p.picture.large
+                    picture: p.picture.large,
+                    location: p.location.city + ', ' + p.location.country
                 }
+                console.log(person.location)
                 tempUsers.push(person)
             })
         })
