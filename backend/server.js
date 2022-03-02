@@ -6,6 +6,12 @@ const fetch = require('node-fetch')
 app.use(cors())
 app.use(express.json())
 
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+const maxParticipants = 20
+
+let tempUsers = []
+
 let users = [
     {
         username: 'bigboy',
@@ -22,8 +28,8 @@ let users = [
 let languages = ['c', 'java', 'english']
 let wow = [1, 2, 3, 4]
 
-function fetchUser(gender, num) {
-    fetch(`https://randomuser.me/api/?gender=${gender}&results=${num}`)
+async function fetchUser(gender, num) {
+    await fetch(`https://randomuser.me/api/?gender=${gender}&results=${num}`)
         .then(res => res.json())
         .then(data => {
             data['results'].forEach(p => {
@@ -36,14 +42,24 @@ function fetchUser(gender, num) {
                     participant: true,
                     picture: p.picture.large
                 }
-                users.push(person)
+                tempUsers.push(person)
             })
         })
 }
 
-function addUsers(males, females) {
-    fetchUser('male', males)
-    fetchUser('female', females)
+async function addUsers() {
+    const males = (maxParticipants / 2) - users.filter(p => p.gender === 'male').length
+    const females = (maxParticipants / 2) - users.filter(p => p.gender === 'female').length
+
+    await fetchUser('male', males)
+    await fetchUser('female', females)
+
+    let n = tempUsers.length
+
+    while (n-- > 0) {
+        users.push(tempUsers[n])
+        await delay(Math.random() * 1000)
+    }
 }
 
 app.post('/login', (req, res) => {
@@ -54,10 +70,6 @@ app.post('/login', (req, res) => {
         res.json({ access: false })
     } else {
         res.json({ access: true })
-        if (users.length != 20) {
-            const [males, females] = (foundUser.gender === 'male') ? [9, 10] : [10, 9];
-            addUsers(males, females)
-        }
     }
 })
 
@@ -87,15 +99,30 @@ app.post('/create-account', (req, res) => {
 })
 
 app.get('/participants', (req, res) => {
-    res.json({
-        ok: true,
-        participants: users
-    })
+    if (req.query.count != null) {
+        res.json({
+            ok: true,
+            count: users.length
+        })
+    } else {
+        res.json({
+            ok: true,
+            participants: users
+        })
+    }
+})
+
+let addedRemaining = false
+app.post('/participants', (req, res) => {
+    if (req.body.action == 'addRemaining' && !addedRemaining) {
+        addedRemaining = true
+
+        addUsers()
+
+        res.json({ ok: true })
+    }
 })
 
 app.listen(3000, () => {
     console.log('Listening on port 3000...')
-    setInterval(() => {
-        console.log(users.length)
-    }, 1000)
 })
