@@ -14,15 +14,25 @@
     </div>
     <div class="participantsBox" style="top: 600px">
       <h2>Participants ({{ participants.count }})</h2>
-      <ul>
-        <li :key="p.id" v-for="p in participants.list">{{ p.fullname }}</li>
-      </ul>
+      <UserCard
+        :key="p.id"
+        v-for="p in participants.list"
+        format="small"
+        :fullname="p.fullname"
+        :picture="p.picture"
+        :location="p.location"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import UserCard from "@/components/UserCard.vue";
+
 export default {
+  components: {
+    UserCard,
+  },
   data() {
     return {
       cheats: {
