@@ -1,5 +1,4 @@
 <template>
-
   <div id="app">
     <div class="devBox">
       <h2>Bigboy Links</h2>
@@ -54,12 +53,11 @@
 html,
 body {
   margin: 0;
-  background-color:#E9E5D6; 
+  background-color: #e9e5d6;
 }
 
 #app {
-
-  background-color:#E9E5D6;
+  background-color: #e9e5d6;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -67,7 +65,12 @@ body {
   color: #2c3e50;
 }
 
-h1,h2,h3,h4,h5,p{
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
   color: #362706;
 }
 
@@ -94,5 +97,4 @@ h1,h2,h3,h4,h5,p{
 /* #464E2E */
 /* #ACB992 */
 /* #E9E5D6  light */
-
 </style>
