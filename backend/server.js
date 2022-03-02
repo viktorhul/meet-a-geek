@@ -44,7 +44,6 @@ async function fetchUser(gender, num) {
                     picture: p.picture.large,
                     location: p.location.city + ', ' + p.location.country
                 }
-                console.log(person.location)
                 tempUsers.push(person)
             })
         })
