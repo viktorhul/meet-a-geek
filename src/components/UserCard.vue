@@ -108,7 +108,6 @@ export default {
 .card {
   width: 250px;
   padding: 10px;
-  height: 60px;
 }
 
 .card + .card {
@@ -129,6 +128,7 @@ export default {
   display: flex;
   flex-direction: row;
   border-radius: 5px;
+  height: 60px;
 }
 
 .hoverable {

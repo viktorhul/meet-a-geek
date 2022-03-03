@@ -41,9 +41,21 @@
         >
       </div>
 
-      <div style="z-index: 100" class="actionBox actionToggle" @>
+      <div
+        style="z-index: 100"
+        class="actionBox actionToggle"
+        @click="cheatBoxActive = !cheatBoxActive"
+      >
         <span> Cheats </span>
-        <div class="menuBox">hey</div>
+        <div class="menuBox" v-if="cheatBoxActive">
+          <ul>
+            <li v-if="!kraken" @click="loadRemainingParticipants">
+              Release the Kraken
+            </li>
+            <li v-else>Kraken is already released</li>
+            <li>Never press this button</li>
+          </ul>
+        </div>
       </div>
     </header>
 
@@ -88,6 +100,7 @@
               :fullname="tableData(table.id)[0].fullname"
               :picture="tableData(table.id)[0].picture"
               :location="tableData(table.id)[0].location"
+              @dragstart.native="startDrag($event, tableData(table.id)[0])"
             />
             <UserCard v-else format="placeholder" />
 
@@ -99,6 +112,7 @@
               :fullname="tableData(table.id)[1].fullname"
               :picture="tableData(table.id)[1].picture"
               :location="tableData(table.id)[1].location"
+              @dragstart.native="startDrag($event, tableData(table.id)[1])"
             />
             <UserCard v-else format="placeholder" />
           </div>
@@ -117,6 +131,8 @@ export default {
   },
   data() {
     return {
+      kraken: false,
+      cheatBoxActive: false,
       dataChange: false,
       tables: [],
       participants: {
@@ -145,6 +161,21 @@ export default {
     tableData(tableId) {
       return this.participants.list.filter((p) => p.table == tableId);
     },
+    loadRemainingParticipants() {
+      fetch("http://localhost:3000/participants", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "addRemaining",
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    },
     toggleTimer() {
       fetch("http://localhost:3000/admin", {
         method: "POST",
@@ -163,11 +194,13 @@ export default {
           if (data.ok) {
             const res = data.result;
 
+            this.kraken = res.kraken;
+
             if (this.tables.length == 0) {
               this.tables = res.tables;
             }
 
-            this.participants.count = res.participantCount;
+            this.participants.count = res.participants.length;
 
             if (this.participants.list.length == 0) {
               this.participants.list = res.participants;
@@ -200,6 +233,8 @@ export default {
       );
 
       participant.table = table.id;
+
+      console.log(this.participants.list);
     },
   },
 };
@@ -306,7 +341,6 @@ header .actionBox {
 }
 
 .menuBox {
-  display: none;
   position: absolute;
   margin-top: -1px;
   margin-left: -16px;
@@ -316,5 +350,25 @@ header .actionBox {
   background: #eee;
   border: 1px solid #aaa;
   width: 200px;
+}
+
+.menuBox ul {
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menuBox li {
+  padding: 10px;
+}
+
+.menuBox li + .menuBox li {
+  border-top: 1px solid #ccc;
+}
+
+.menuBox li:hover {
+  background: #aaa;
+  color: white;
 }
 </style>
