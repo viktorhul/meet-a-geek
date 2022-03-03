@@ -44,6 +44,10 @@ export default {
 </script>
 
 <style scoped>
+progress {
+  transition-duration: 0.2s;
+}
+
 .loader {
   width: 100%;
   background-color: lightgrey;
