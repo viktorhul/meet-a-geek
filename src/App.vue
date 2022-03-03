@@ -29,7 +29,7 @@
 export default {
   data() {
     return {
-      devOn: true,
+      devOn: false,
     };
   },
 };
