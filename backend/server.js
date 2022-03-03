@@ -47,7 +47,7 @@ async function fetchUser(gender, num) {
     await fetch(`https://randomuser.me/api/?gender=${gender}&results=${num}`)
         .then(res => res.json())
         .then(data => {
-            let n = 1;
+            let n = tempUsers.length + users.length;
             data['results'].forEach(p => {
                 const person = {
                     id: n++,
@@ -172,15 +172,16 @@ function pauseTimer() {
 }
 
 let adminResponse = {
-    participantCount: users.length,
     activeSession: 1,
     sessionStatus: 0,
     sessionTime: sessionTime,
     participants: users,
-    tables: tables
+    tables: tables,
+    kraken: false
 }
 
 app.get('/admin_fetch', (req, res) => {
+    adminResponse.kraken = addedRemaining
     res.json({ ok: true, result: adminResponse })
 })
 
