@@ -1,5 +1,9 @@
 <template>
-  <div class="card card-big" v-if="format == 'big'">
+  <div
+    class="card card-big"
+    :class="{ 'card-active': active }"
+    v-if="format == 'big'"
+  >
     <br />
     <div class="image-cropper">
       <img :src="picture" alt="profile pic" class="avatar avatar-big" />
@@ -12,13 +16,30 @@
     <p>{{ secret }}</p>
   </div>
 
-  <div v-else-if="format == 'small'" class="card card-small">
+  <div
+    v-else-if="format == 'small'"
+    class="card card-small"
+    :class="{ hoverable: hoverable, 'card-active': active }"
+    :draggable="draggable"
+  >
     <div class="profileContainer">
       <img :src="picture" class="avatar avatar-small" />
     </div>
     <div class="textbox">
       <h3>{{ fullname }}</h3>
       <p>{{ location }}</p>
+    </div>
+  </div>
+
+  <div
+    v-else-if="format == 'placeholder'"
+    class="card card-inactive card-small"
+  >
+    <div class="profileContainer">
+      <div class="avatar avatar-small avatar-placeholder"></div>
+    </div>
+    <div class="textbox" style="line-height: 250%">
+      <i style="color: #aaa">Empty seat</i>
     </div>
   </div>
 </template>
@@ -54,18 +75,44 @@ export default {
       type: String,
       default: "big",
     },
+    hoverable: {
+      type: Boolean,
+      default: false,
+    },
+    draggable: {
+      type: Boolean,
+      default: false,
+    },
+    active: {
+      type: Boolean,
+      default: true,
+    },
   },
 };
 </script>
 
 <style scoped>
-.card {
+.card-active {
   /* THIS NEED TO CHANGE */
   background-color: #acb992;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 300px;
+}
+
+.card-inactive {
+  display: flex;
+  flex-direction: row;
+  background-color: #ddd;
+  user-select: none;
+}
+
+.card {
+  width: 250px;
   padding: 10px;
-  margin-bottom: 10px;
+  height: 60px;
+}
+
+.card + .card {
+  margin-top: 10px;
 }
 
 .card-big {
@@ -74,13 +121,34 @@ export default {
   text-align: center;
 }
 
+.card-big h3 {
+  font-size: 16pt;
+}
+
 .card-small {
   display: flex;
   flex-direction: row;
   border-radius: 5px;
 }
 
-.card-small .textbox {
+.hoverable {
+  user-select: none;
+  transition-duration: 0.3s;
+}
+
+.hoverable:hover {
+  cursor: pointer;
+  border: 1px solid #a8b397;
+  background-color: #ccd8b7;
+  transition-duration: 0.2s;
+}
+
+.card-small h3,
+.card-small p {
+  font-size: 10pt;
+}
+
+.textbox {
   text-align: left;
   height: 100%;
   margin-left: 10px;
@@ -88,7 +156,6 @@ export default {
 
 .textbox h3 {
   margin: 0;
-  font-size: 16pt;
   font-weight: bold;
 }
 
@@ -102,8 +169,13 @@ export default {
 }
 
 .avatar {
+  display: block;
   vertical-align: middle;
   border-radius: 50%;
+}
+
+.avatar-placeholder {
+  background-color: lightgray;
 }
 
 .avatar-big {
@@ -113,8 +185,8 @@ export default {
 }
 
 .avatar-small {
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   border: 2px solid lightgray;
 }
 
