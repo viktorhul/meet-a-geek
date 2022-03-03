@@ -229,18 +229,18 @@ export default {
     },
     onDrop(event, table) {
       if (this.tableData(table.id).length == 2) {
-        console.log("this bigboy is full");
         return;
       }
 
       const participantId = event.dataTransfer.getData("participantId");
+
+      if (!participantId) return;
+
       const participant = this.participants.list.find(
         (p) => p.id == participantId
       );
 
       participant.table = table.id;
-
-      console.log(this.participants.list);
     },
   },
 };
