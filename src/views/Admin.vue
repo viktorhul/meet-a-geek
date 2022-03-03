@@ -196,12 +196,14 @@ export default {
 
             this.kraken = res.kraken;
 
+            // TODO: Refresh tables
             if (this.tables.length == 0) {
               this.tables = res.tables;
             }
 
             this.participants.count = res.participants.length;
 
+            // TODO: Refresh participants
             if (this.participants.list.length == 0) {
               this.participants.list = res.participants;
             }
@@ -226,8 +228,12 @@ export default {
       event.dataTransfer.setData("participantId", item.id);
     },
     onDrop(event, table) {
+      if (this.tableData(table.id).length == 2) {
+        console.log("this bigboy is full");
+        return;
+      }
+
       const participantId = event.dataTransfer.getData("participantId");
-      console.log(`Participant ${participantId} -> table ${table.id}`);
       const participant = this.participants.list.find(
         (p) => p.id == participantId
       );

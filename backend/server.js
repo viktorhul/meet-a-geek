@@ -34,7 +34,7 @@ let users = [
         language: 'c',
         wow: 2,
         participant: true,
-        picture: 'https://www.barncancerfonden.se/contentassets/7d3f1c95a98247b5b52eb708c1fad03c/bauhus-720x405.png',
+        picture: 'https://cdn.discordapp.com/attachments/920273373240655912/948642479505281084/r5yt.png',
         location: 'Moms basement',
         table: null,
     }

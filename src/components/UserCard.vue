@@ -161,6 +161,10 @@ export default {
 
 .textbox p {
   margin: 0;
+  text-overflow: ellipsis;
+  width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profileContainer {
