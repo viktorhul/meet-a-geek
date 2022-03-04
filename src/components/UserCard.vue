@@ -6,7 +6,7 @@
   >
     <br />
     <div class="image-cropper">
-      <img :src="picture" alt="profile pic" class="avatar avatar-big" />
+      <img :src="picture" alt="profile pic" class="avatar avatar-big"/>
     </div>
     <h2>{{ fullname }}</h2>
     <p class="title">{{ statement }}</p>
@@ -115,6 +115,9 @@ export default {
 }
 
 .card-big {
+  width: 80%;
+  max-width: 300px;
+  min-width: 200px;
   border-radius: 10%;
   margin: auto;
   text-align: center;
