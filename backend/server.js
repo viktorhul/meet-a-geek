@@ -10,13 +10,20 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 const maxParticipants = 20
 
+const pictures = [
+    'https://cdn.discordapp.com/attachments/932568365699051532/948939755712819220/unknown.png',
+    'https://cdn.discordapp.com/attachments/932568365699051532/948659091406983238/unknown.png',
+    'https://cdn.discordapp.com/attachments/932568365699051532/948579977333456918/unknown.png',
+    'https://cdn.discordapp.com/attachments/932568365699051532/948550531763290132/unknown.png'
+]
+
 let tables = []
 function createTables(num) {
     for (i = 0; i < num; i++) {
         const table = {
             id: i,
             number: i + 1,
-            seats: []
+            seats: 0
         }
         tables.push(table)
     }
@@ -113,6 +120,7 @@ app.post('/create-account', (req, res) => {
         password: user.password,
         language: user.language,
         wow: user.wow,
+        picture: pictures[Math.floor(Math.random() * 4)],
         table: null
     }
 
@@ -155,7 +163,6 @@ function resetTimer() {
 }
 
 function startTimer() {
-    console.log('Timer started')
     adminResponse.sessionStatus = 1
     sessionTimer = setInterval(() => {
         if (sessionTime.s-- == 0) {
@@ -165,13 +172,22 @@ function startTimer() {
 
         if (sessionTime.m == 0 && sessionTime.s == 0) {
             clearInterval(sessionTimer)
+            sessionOver();
             adminResponse.sessionStatus = 0
         }
     }, 1000)
 }
 
+function sessionOver() {
+    if (adminResponse.activeSession < 3) {
+        adminResponse.activeSession++;
+    } else {
+        // Endscreen info
+
+    }
+}
+
 function pauseTimer() {
-    console.log('Timer paused')
     adminResponse.sessionStatus = 0
     clearInterval(sessionTimer)
 }
@@ -190,6 +206,19 @@ app.get('/admin_fetch', (req, res) => {
     res.json({ ok: true, result: adminResponse })
 })
 
+app.get('user_info', (req, res) => {
+    const userId = req.body.id
+
+    const user = users.find(u => u.id == userId)
+
+    if (!user) {
+        return res.json({ ok: false })
+    } else {
+        // TODO: Return table data and so on
+        return res.json({ ok: true })
+    }
+})
+
 app.post('/admin', (req, res) => {
     switch (req.body.action) {
         case 'toggleTimer':
@@ -200,6 +229,34 @@ app.post('/admin', (req, res) => {
                 pauseTimer()
                 return res.json({ ok: true })
             }
+            break;
+
+        case 'updateUsers':
+            req.body.users.forEach(u => {
+                if (u.table == null) return;
+
+                users.forEach(s => {
+                    if (u.id == s.id) {
+                        s.table = u.table
+
+                        const tableToChange = tables.find(t => t.id == s.table)
+                        tableToChange.seats++
+                    }
+                })
+            })
+            return res.json({ ok: true })
+            break;
+
+        case 'autoAssign':
+            if (users.length < 20) return;
+            users.forEach(u => {
+                if (u.table == null) {
+                    const table = tables.find(t => t.seats != 2)
+                    u.table = table.id
+                    table.seats++
+                }
+            })
+            break;
     }
 })
 
