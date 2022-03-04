@@ -3,11 +3,10 @@
     <br>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <img src="https://placebeard.it/640x360" alt="John" class="avatar2" style="margin: 0 auto" >
-      <h2>Contact information:</h2>
-      <div align="left">
-        <h5 >Name: Viking Dude</h5>
-        <h5>Email: Viking.Dude@solaris.com</h5>
-        <h5>Phone: 112</h5>
+      <h3>Contact information:</h3>
+      <div align="center">
+        <h5 >Name:</h5>
+        <h5>Email:</h5>
       </div>
     <br>
     <div>
@@ -29,10 +28,11 @@
 <style scoped>
 .card {
   /* THIS NEED TO CHANGE */
+  padding: 5px;
   background-color: #ACB992;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
   max-width: 300px;
-  border-radius: 10%;
+  border-radius: 5%;
   margin: auto;
   text-align: center;
 }
@@ -43,7 +43,7 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  border: 7px solid lightgray;
+  border: 7px solid ;
 }
 
 
