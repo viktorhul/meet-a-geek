@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="createContainer">
     <h1>Create a new account</h1>
     <div v-if="formComplete">
       <h2>Woho! Your account is created!</h2>
@@ -48,6 +48,29 @@
           id="password"
           v-model="password.value"
           placeholder="Password"
+        />
+      </div>
+
+      <div class="inputField">
+        <label for="fullname"
+          >Your name
+          <span style="color: red" v-if="!fullname.valid">{{
+            fullname.errorMsg
+          }}</span>
+        </label>
+        <input
+          autocomplete="off"
+          @mousedown="checkFullname"
+          @keyup="checkFullname"
+          @change="checkFullname"
+          :class="{
+            form_valid: fullname.valid,
+            form_invalid: !fullname.valid && !fullname.empty,
+          }"
+          type="text"
+          id="fullname"
+          v-model="fullname.value"
+          placeholder="Your name"
         />
       </div>
 
@@ -141,6 +164,7 @@
         :disabled="
           !username.valid ||
           !password.valid ||
+          !fullname.valid ||
           !language.valid ||
           !wow.valid ||
           !gender.valid
@@ -164,6 +188,12 @@ export default {
         empty: true,
       },
       password: {
+        valid: false,
+        errorMsg: "",
+        value: "",
+        empty: true,
+      },
+      fullname: {
         valid: false,
         errorMsg: "",
         value: "",
@@ -222,6 +252,15 @@ export default {
         this.password.valid = true;
       }
     },
+    checkFullname() {
+      this.fullname.empty = false;
+      if (this.fullname.value.length < 1) {
+        this.fullname.valid = false;
+        this.fullname.errorMsg = "Add your name";
+      } else {
+        this.fullname.valid = true;
+      }
+    },
     checkLanguage() {
       this.language.empty = false;
 
@@ -264,6 +303,7 @@ export default {
         body: JSON.stringify({
           username: this.username.value,
           password: this.password.value,
+          fullname: this.fullname.value,
           language: this.language.value,
           wow: this.wow.value,
         }),
@@ -283,6 +323,12 @@ export default {
 </script>
 
 <style scoped>
+.createContainer {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
 .form_valid {
   border: 1px solid darkgreen !important;
   background-color: rgb(177, 224, 177);
