@@ -1,4 +1,5 @@
 <template>
+  <div class="box">
   <div v-if="waitingForCompletion">
     <h1>Waiting for geeks...</h1>
     <progress :value="parts.complete" :max="parts.max"></progress>
@@ -7,6 +8,7 @@
   <div v-else>
     <h1>All geeks are ready!</h1>
     <p>Waiting for host to start the session...</p>
+  </div>
   </div>
 </template>
 
@@ -44,6 +46,11 @@ export default {
 </script>
 
 <style scoped>
+
+.box {
+  padding-top: 50px;
+}
+
 progress {
   transition-duration: 0.2s;
 }

@@ -2,51 +2,88 @@
 
   <div class="background">
   <div class="geekreview" >
-    <h1>Geek Review</h1>
-    <div>
+    <h1 class="header">Geek Review</h1>
+    <div style="padding: 20px">
       <UserCard></UserCard>
     </div>
-    <br>
-    <h2>Share your information to this geek?</h2>
-    <div>
-      <standard_button class="buttonStyle">YES</standard_button>
-      <standard_button>NO</standard_button>
+    <div class="inputField">
+      <label for="meet">
+        Did the geek have sufficient carisma skill?
+      </label>
+      <select
+        name="q1">
+        <option value="" disabled selected> </option>
+      <option value="YES" >YES</option>
+      <option value="NO"> NO</option>
+      </select>
     </div>
-    <br>
-    <h5>Q1: Did the geek have sufficient carisma skill?</h5>
-    <div>
-      <standard_button>YES</standard_button>
-      <standard_button>NO</standard_button>
-    </div>
-    <br>
-    <h5>Q2: Did the geek have a satisfactory main programing language?</h5>
-    <div>
-      <standard_button>YES</standard_button>
-      <standard_button>NO</standard_button>
-    </div>
-    <br>
-    <h5>Q3: Did the geek have sufficient knowlege in Emacs shortcuts? </h5>
-    <div>
-      <standard_button>YES</standard_button>
-      <standard_button>NO</standard_button>
-    </div>
-    <br>
-    <h5>Q4: Did the geek seem to have showered in the last day?</h5>
-    <div>
-      <standard_button style="">YES </standard_button>
-      <standard_button>NO</standard_button>
-    </div>
-    <br>
-    <h5>Q5: Did the geek behave, and look, in accordance with his profile?</h5>
-    <div>
 
-      <standard_button>YES</standard_button>
-      <standard_button>NO</standard_button>
+    <div class="inputField">
+      <label for="q1">
+        Did the geek have sufficient carisma skill?
+      </label>
+      <select
+          name="q1">
+        <option value="" disabled selected> </option>
+        <option value="YES" >YES</option>
+        <option value="NO">NO</option>
+        <option value="Maybe">MAYBE/DONT KNOW</option>
+      </select>
     </div>
-    <br>
-    <br>
-    <div>
-      <standard_button @click="onDone">SUBMIT</standard_button>
+
+    <div class="inputField">
+      <label for="q2">
+        Did the geek have a satisfactory main programing language?
+      </label>
+      <select
+          name="q2">
+        <option value="" disabled selected> </option>
+        <option value="YES" >YES</option>
+        <option value="NO">NO</option>
+        <option value="Maybe">MAYBE/DONT KNOW</option>
+      </select>
+    </div>
+
+    <div class="inputField">
+      <label for="q3">
+        Did the geek have sufficient knowlege in Emacs shortcuts?
+      </label>
+      <select
+          name="q3">
+        <option value="" disabled selected> </option>
+        <option value="YES" >YES</option>
+        <option value="NO">NO</option>
+        <option value="Maybe"> MAYBE/DONT KNOW</option>
+      </select>
+    </div>
+
+    <div class="inputField">
+      <label for="q4">
+        Did the geek seem to have showered in the last day?
+      </label>
+      <select
+          name="q4">
+        <option value="" disabled selected> </option>
+        <option value="YES" >YES</option>
+        <option value="NO"> NO</option>
+        <option value="Maybe"> MAYBE/DONT KNOW</option>
+      </select>
+    </div>
+
+    <div class="inputField">
+      <label for="q5">
+        Did the geek behave, and look, in accordance with his profile?
+      </label>
+      <select
+          name="q5">
+        <option value="" disabled selected> </option>
+        <option value="YES" >YES</option>
+        <option value="NO"> NO</option>
+        <option value="Maybe"> MAYBE/DONT KNOW</option>
+      </select>
+    </div>
+    <div style="padding: 10px">
+      <standard_button @click="onDone" >Submit!</standard_button>
     </div>
     <br>
   </div>
@@ -74,6 +111,44 @@ export default {
 
 <style scoped>
 
+.header {
+  font-size: 250%;
+  margin: 20px 0  ;
+}
+
+.inputField label {
+  font-size: 12pt;
+  display: block;
+  margin-left: 10px;
+  
+}
+
+.inputField {
+  text-align: center;
+  font-size: 12pt;
+  width: 100%;
+}
+
+.inputField input [type="text"]{
+  width: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #bbb;
+  font-size: 12pt;
+}
+
+.background {
+  padding-top: 50px;
+  margin-outside: 20px;
+  padding-bottom: 20px;
+}
+
+
+h1 {
+  border-bottom: 2px solid #ccc;
+  align-self: center;
+}
 button:hover, a:hover {
   color: red;
 }

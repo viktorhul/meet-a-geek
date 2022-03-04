@@ -1,43 +1,85 @@
 <template>
   <div class="card">
-    <div class="image-cropper">
-    <img src="https://placebeard.it/640x360" alt="John" style="width:100%" class="avatar2" >
+    <br>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <img src="https://placebeard.it/640x360" alt="John" class="avatar2" style="margin: 0 auto" >
+    <br>
+      <h3 >name here!</h3>
+      <div align="center">
+        <h4></h4>
+      </div>
+    <br>
+    <div>
+      <h2>Socials:</h2>
+      <div class="links">
+        <a href="http://www.facebook.com" class="fa fa-facebook"></a>
+        <a href="http://www.linkedin.com" class="fa fa-linkedin" ></a>
+        <a href="mailto:" class="fa fa-google"></a>
+      </div>
     </div>
-    <h2>Viking Dude</h2>
-
+    <br>
   </div>
 </template>
 
 <script>
 
-export default {
-}
 </script>
 
 <style scoped>
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /* THIS NEED TO CHANGE */
+  padding: 5px;
+  background-color: #ACB992;
+  box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
   max-width: 300px;
-  border-radius: 5%;
+  border-radius: 10px;
   margin: auto;
   text-align: center;
 }
+.avatar2 {
 
-.title {
-  font-size: 18px;
+  vertical-align: middle;
+
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 7px solid lightgray;
 }
 
-button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
+
+/* Style all font awesome icons */
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
   text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
+  text-decoration: none;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+  color: #362706;
+}
+
+/* Twitter */
+.fa-twitter {
+  color: #362706;
+}
+/* Linked in */
+.fa-linkedin {
+  color: #362706;
+}
+
+.fa-google {
+  color: #362706;
+
 }
 
 a {
@@ -48,13 +90,6 @@ a {
 
 button:hover, a:hover {
   opacity: 0.7;
-}
-
-.avatar2 {
-  padding-top: 3px;
-  size: auto;
-  border-radius: 5%;
-  border: 2px;
 }
 
 
