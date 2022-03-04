@@ -21,8 +21,7 @@ let tables = []
 function createTables(num) {
     for (i = 0; i < num; i++) {
         const table = {
-            id: i,
-            number: i + 1,
+            id: i + 1,
             seats: 0
         }
         tables.push(table)
@@ -206,8 +205,8 @@ app.get('/admin_fetch', (req, res) => {
     res.json({ ok: true, result: adminResponse })
 })
 
-app.get('user_info', (req, res) => {
-    const userId = req.body.id
+app.get('/user_info', (req, res) => {
+    const userId = req.query.id
 
     const user = users.find(u => u.id == userId)
 
@@ -215,7 +214,13 @@ app.get('user_info', (req, res) => {
         return res.json({ ok: false })
     } else {
         // TODO: Return table data and so on
-        return res.json({ ok: true })
+        return res.json({
+            ok: true, result: {
+                session: adminResponse.activeSession,
+                sessionTime: adminResponse.sessionTime,
+                tableNumber: user.table,
+            }
+        })
     }
 })
 
@@ -224,9 +229,6 @@ app.post('/admin', (req, res) => {
         case 'toggleTimer':
             if (adminResponse.sessionStatus == 0 && !(adminResponse.sessionTime.m == 0 && adminResponse.sessionTime.s == 0)) {
                 startTimer()
-                return res.json({ ok: true })
-            } else {
-                pauseTimer()
                 return res.json({ ok: true })
             }
             break;

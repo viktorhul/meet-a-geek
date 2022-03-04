@@ -17,27 +17,11 @@
           <span>{{ timer.remaining }}</span>
         </span>
       </div>
-      <div @click="toggleTimer" class="actionBox actionToggle">
-        <span>
-          <div style="display: flex">
-            <div>
-              <h5>Status</h5>
-              <span>{{ timer.active ? "Active" : "Paused" }}</span>
-            </div>
-            <div class="toggleButton">
-              <i
-                class="fa"
-                :class="{ 'fa-pause': !timer.active, 'fa-play': timer.active }"
-              ></i>
-            </div>
-          </div>
-        </span>
-      </div>
 
-      <div @click="autoAssign" class="actionBox actionToggle">
+      <div class="actionBox">
         <span>
-          <h5>Auto Assign</h5>
-          <i class="fa fa-random" style="font-size: 18pt; color: #626b51"></i>
+          <h5>Status</h5>
+          <span>{{ timer.active ? "Running" : "Stopped" }}</span>
         </span>
       </div>
 
@@ -46,6 +30,24 @@
           ><h5>Date Session</h5>
           <span>{{ session }} / {{ maxSessions }}</span></span
         >
+      </div>
+
+      <div
+        @click="toggleTimer"
+        class="actionBox"
+        :class="{ actionToggle: !timer.active, disabledToggle: timer.active }"
+      >
+        <span>
+          <h5>Start session</h5>
+          <i class="fa fa-play icon"></i
+        ></span>
+      </div>
+
+      <div @click="autoAssign" class="actionBox actionToggle">
+        <span>
+          <h5>Auto Assign</h5>
+          <i class="fa fa-random icon"></i>
+        </span>
       </div>
 
       <div
@@ -68,10 +70,8 @@
 
     <div class="wrapper">
       <div class="sidebar">
-        <h4>Participants ({{ participants.count }})</h4>
-        <center v-if="!participants.count">
-          Waiting for the first geek to arrive...
-        </center>
+        <h4>Unassigned ({{ unassigned.length }})</h4>
+        <center v-if="unassigned.length == 0">No unassigned geeks</center>
         <div v-else>
           <UserCard
             v-for="p in unassigned"
@@ -98,7 +98,7 @@
             @drop.prevent="onDrop($event, table)"
             :class="{ over: table.isOver }"
           >
-            <h3>Table {{ table.number }}</h3>
+            <h3>Table {{ table.id }}</h3>
             <UserCard
               v-if="tableData(table.id)[0] != null"
               format="small"
@@ -309,6 +309,20 @@ header .actionBox {
   border-bottom: 1px solid rgb(75, 75, 75);
   transition-duration: 0.3s;
   user-select: none;
+}
+
+.disabledToggle {
+  color: #eee;
+}
+
+.disabledToggle h5,
+.disabledToggle i {
+  color: lightgrey;
+}
+
+.icon {
+  font-size: 18pt;
+  color: #626b51;
 }
 
 .actionBox.actionToggle:hover {
