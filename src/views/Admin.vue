@@ -34,6 +34,13 @@
         </span>
       </div>
 
+      <div @click="autoAssign" class="actionBox actionToggle">
+        <span>
+          <h5>Auto Assign</h5>
+          <i class="fa fa-random" style="font-size: 18pt; color: #626b51"></i>
+        </span>
+      </div>
+
       <div class="actionBox">
         <span
           ><h5>Date Session</h5>
@@ -134,6 +141,7 @@ export default {
       kraken: false,
       cheatBoxActive: false,
       dataChange: false,
+      changeTimer: null,
       tables: [],
       participants: {
         count: 0,
@@ -158,8 +166,37 @@ export default {
     },
   },
   methods: {
+    updateChanges() {
+      fetch("http://localhost:3000/admin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "updateUsers",
+          users: this.participants.list,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.ok) {
+            this.dataChange = false;
+          }
+        });
+    },
     tableData(tableId) {
       return this.participants.list.filter((p) => p.table == tableId);
+    },
+    autoAssign() {
+      fetch("http://localhost:3000/admin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "autoAssign",
+        }),
+      });
     },
     loadRemainingParticipants() {
       fetch("http://localhost:3000/participants", {
@@ -197,14 +234,14 @@ export default {
             this.kraken = res.kraken;
 
             // TODO: Refresh tables
-            if (this.tables.length == 0) {
+            if (!this.dataChange) {
               this.tables = res.tables;
             }
 
             this.participants.count = res.participants.length;
 
             // TODO: Refresh participants
-            if (this.participants.list.length == 0) {
+            if (!this.dataChange) {
               this.participants.list = res.participants;
             }
 
@@ -225,9 +262,13 @@ export default {
         });
     },
     startDrag(event, item) {
+      clearTimeout(this.changeTimer);
+      console.log("dataChange true");
+      this.dataChange = true;
       event.dataTransfer.setData("participantId", item.id);
     },
     onDrop(event, table) {
+      this.changeTimer = setTimeout(() => this.updateChanges(), 2000);
       if (this.tableData(table.id).length == 2) {
         return;
       }
@@ -303,11 +344,13 @@ header .actionBox {
 
 .sidebar {
   text-align: left;
-  width: 330px;
+  width: 340px;
+  height: 700px;
   background-color: #eee;
   border-right: 1px solid rgb(75, 75, 75);
   border-bottom: 1px solid rgb(75, 75, 75);
   padding: 10px;
+  overflow-y: scroll;
 }
 
 .sidebar h4 {

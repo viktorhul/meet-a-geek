@@ -4,13 +4,21 @@
         <div class="tableContainer">
             <h3 @click="$emit('TableClicked')">TABLE 8</h3>
         </div>
+        <br><br>
         <h4>WAITING FOR HOST</h4>
     </div>
 </template>
 
 <style scoped>
 .tableContainer{
+    margin: auto;
+    padding: 10px;
     border-style: solid;
-    width: 30%;
+    width: 15%;
+    position: relative;
+    
+}
+.h3{
+    size: 80%;
 }
 </style>

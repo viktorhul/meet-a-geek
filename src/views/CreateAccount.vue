@@ -157,21 +157,22 @@
         >
         <input type="file" disabled />
       </div>
-
-      <button
-        class="create"
-        @click.prevent="createAccount"
-        :disabled="
-          !username.valid ||
-          !password.valid ||
-          !fullname.valid ||
-          !language.valid ||
-          !wow.valid ||
-          !gender.valid
-        "
-      >
-        Create account
-      </button>
+      <div class= "button-container">
+        <button
+          class="create"
+          @click.prevent="createAccount"
+          :disabled="
+            !username.valid ||
+            !password.valid ||
+            !fullname.valid ||
+            !language.valid ||
+            !wow.valid ||
+            !gender.valid
+          "
+        >
+          Create account
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -359,6 +360,7 @@ h1 {
 .inputField {
   text-align: left;
   width: 100%;
+  padding: 0 10px;
 }
 
 .inputField label {
@@ -382,10 +384,12 @@ h1 {
 button + button {
   margin-top: 10px;
 }
-
+.button-container{
+  padding: 0 10px;
+}
 button {
-  outline: 0;
   width: 100%;
+  outline: 0;
   padding: 10px;
   border: 0;
   border-radius: 5px;

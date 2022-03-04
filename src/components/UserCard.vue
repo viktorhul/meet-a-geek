@@ -176,8 +176,7 @@ export default {
 
 .avatar {
   display: block;
-  vertical-align: middle;
-  align-self: center;
+  margin: auto;
   border-radius: 50%;
 }
 
