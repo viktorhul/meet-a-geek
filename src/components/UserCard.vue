@@ -115,7 +115,9 @@ export default {
 }
 
 .card-big {
-  border-radius: 10%;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
+
   margin: auto;
   text-align: center;
 }
@@ -175,6 +177,7 @@ export default {
 .avatar {
   display: block;
   vertical-align: middle;
+  align-self: center;
   border-radius: 50%;
 }
 

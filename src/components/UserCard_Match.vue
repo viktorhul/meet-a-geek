@@ -1,12 +1,12 @@
 <template>
   <div class="card">
     <br>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <img src="https://placebeard.it/640x360" alt="John" class="avatar2" style="margin: 0 auto" >
-      <h3>Contact information:</h3>
+    <br>
+      <h3 >name here!</h3>
       <div align="center">
-        <h5 >Name:</h5>
-        <h5>Email:</h5>
+        <h4></h4>
       </div>
     <br>
     <div>
@@ -14,7 +14,7 @@
       <div class="links">
         <a href="http://www.facebook.com" class="fa fa-facebook"></a>
         <a href="http://www.linkedin.com" class="fa fa-linkedin" ></a>
-        <a href="http://www.twitter.com" class="fa fa-twitter"></a>
+        <a href="mailto:" class="fa fa-google"></a>
       </div>
     </div>
     <br>
@@ -32,7 +32,7 @@
   background-color: #ACB992;
   box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
   max-width: 300px;
-  border-radius: 5%;
+  border-radius: 10px;
   margin: auto;
   text-align: center;
 }
@@ -43,7 +43,7 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  border: 7px solid ;
+  border: 7px solid lightgray;
 }
 
 
@@ -75,6 +75,11 @@
 /* Linked in */
 .fa-linkedin {
   color: #362706;
+}
+
+.fa-google {
+  color: #362706;
+
 }
 
 a {
