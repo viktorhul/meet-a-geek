@@ -4,9 +4,11 @@
     <h1>MATCH FOUND!</h1>
     <!-- <UserProfileMatch /> -->
     <UserCard />
-
+    
     <MoveToTable @TableClicked="startTimer()" v-if="DateRun === false"/>
     <CountdownTimer v-else/>
+    
+
 </div>
 </template>
 
@@ -43,5 +45,5 @@ export default{
 </script>
 
 <style scoped>
-
+    
 </style>
