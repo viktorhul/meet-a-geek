@@ -1,7 +1,11 @@
 <template>
-<div>
+<div class = "timer">
+    <div class = "counterdowner">
     <p id="timeleft" v-if="timeleft > 0">{{timeleft}}</p>
-    <p style="font-weight:bold;" v-else>Times up</p>
+    
+    
+    
+    </div>
 </div>
 </template>
 
@@ -33,3 +37,12 @@ export default{
      } 
 }
 </script>
+
+<style scoped>
+.timer{
+    padding: 80px;
+}
+.counterdowner{
+    text-size-adjust: 50px;
+}
+</style>

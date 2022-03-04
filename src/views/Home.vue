@@ -29,12 +29,14 @@
           placeholder="Password"
         />
       </div>
+      <div class="fix-padding">
       <button class="login" @click.prevent="login" :disabled="!validInputData">
         Log in
       </button>
       <button class="create" @click.prevent="$router.push('/create-account')">
         Create account
       </button>
+      </div>
     </form>
   </div>
 </template>
@@ -118,6 +120,7 @@ h1 {
 .inputField {
   text-align: left;
   width: 100%;
+  padding: 0 10px;
 }
 
 .inputField label {
@@ -146,6 +149,9 @@ button {
   padding: 10px;
   border: 0;
   border-radius: 5px;
+}
+.fix-padding{
+  padding: 0 10px;
 }
 
 button:not(:disabled).login {
