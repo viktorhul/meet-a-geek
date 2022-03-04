@@ -97,6 +97,8 @@ export default {
 
 <style scoped>
 .home {
+  max-width: 500px;
+  margin: 0 auto;
   padding-top: 50px;
 }
 
