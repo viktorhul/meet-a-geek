@@ -104,11 +104,16 @@ app.post('/create-account', (req, res) => {
         return res.json({ created: false, message: 'Username or password cannot be empty' })
     }
 
+    const nextId = users.length + tempUsers.length
+
     const newUser = {
+        id: nextId,
         username: user.username,
+        fullname: user.fullname,
         password: user.password,
         language: user.language,
-        wow: user.wow
+        wow: user.wow,
+        table: null
     }
 
     users.push(newUser)
