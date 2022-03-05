@@ -154,47 +154,36 @@ app.post('/participants', (req, res) => {
     }
 })
 
-let sessionTimer = null
-let sessionTime = { m: 10, s: 0 }
-
 function resetTimer() {
-    sessionTime = { m: 10, s: 0 }
+    adminResponse.sessionTime = { m: 10, s: 0 }
 }
 
 function startTimer() {
+    if (adminResponse.activeSession == 3) return
+
+    if (adminResponse.activeSession == 1 && adminResponse.sessionTime.m == 10) adminResponse.activeSession--
+    adminResponse.activeSession++
+    resetTimer()
     adminResponse.sessionStatus = 1
+
     sessionTimer = setInterval(() => {
-        if (sessionTime.s-- == 0) {
-            sessionTime.s = 59
-            sessionTime.m--
+        if (adminResponse.sessionTime.s-- == 0) {
+            adminResponse.sessionTime.s = 59
+            adminResponse.sessionTime.m--
         }
 
-        if (sessionTime.m == 0 && sessionTime.s == 0) {
+        if (adminResponse.sessionTime.m == 0 && adminResponse.sessionTime.s == 0) {
             clearInterval(sessionTimer)
-            sessionOver();
-            adminResponse.sessionStatus = 0
+
+            adminResponse.sessionStatus = (adminResponse.activeSession == 3) ? 1 : 0
         }
-    }, 1000)
-}
-
-function sessionOver() {
-    if (adminResponse.activeSession < 3) {
-        adminResponse.activeSession++;
-    } else {
-        // Endscreen info
-
-    }
-}
-
-function pauseTimer() {
-    adminResponse.sessionStatus = 0
-    clearInterval(sessionTimer)
+    }, 1) // TODO: Change to 1000 when done debugging
 }
 
 let adminResponse = {
     activeSession: 1,
     sessionStatus: 0,
-    sessionTime: sessionTime,
+    sessionTime: { m: 10, s: 0 },
     participants: users,
     tables: tables,
     kraken: false
@@ -227,7 +216,7 @@ app.get('/user_info', (req, res) => {
 app.post('/admin', (req, res) => {
     switch (req.body.action) {
         case 'toggleTimer':
-            if (adminResponse.sessionStatus == 0 && !(adminResponse.sessionTime.m == 0 && adminResponse.sessionTime.s == 0)) {
+            if (adminResponse.sessionStatus == 0 && !(adminResponse.sessionTime.m == 0 && adminResponse.activeSession == 3)) {
                 startTimer()
                 return res.json({ ok: true })
             }

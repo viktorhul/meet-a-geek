@@ -19,13 +19,6 @@
       </div>
 
       <div class="actionBox">
-        <span>
-          <h5>Status</h5>
-          <span>{{ timer.active ? "Running" : "Stopped" }}</span>
-        </span>
-      </div>
-
-      <div class="actionBox">
         <span
           ><h5>Date Session</h5>
           <span>{{ session }} / {{ maxSessions }}</span></span
@@ -246,6 +239,7 @@ export default {
             }
 
             this.session = res.activeSession;
+
             this.timer.active = res.sessionStatus;
 
             const minutes =
