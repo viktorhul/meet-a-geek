@@ -160,6 +160,7 @@ export default {
   },
   methods: {
     updateChanges() {
+      // TODO: Update API
       fetch("http://localhost:3000/admin", {
         method: "POST",
         headers: {
@@ -181,7 +182,8 @@ export default {
       return this.participants.list.filter((p) => p.table == tableId);
     },
     autoAssign() {
-      fetch("http://localhost:3000/admin", {
+      fetch("http://localhost:3000/admin/auto_assign");
+      /*fetch("http://localhost:3000/admin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -189,10 +191,11 @@ export default {
         body: JSON.stringify({
           action: "autoAssign",
         }),
-      });
+      });*/
     },
     loadRemainingParticipants() {
-      fetch("http://localhost:3000/participants", {
+      fetch("http://localhost:3000/admin/add_participants");
+      /*fetch("http://localhost:3000/participants", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -204,9 +207,11 @@ export default {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-        });
+        });*/
     },
     toggleTimer() {
+      fetch("http://localhost:3000/admin/start_session");
+      /*
       fetch("http://localhost:3000/admin", {
         method: "POST",
         headers: {
@@ -215,41 +220,36 @@ export default {
         body: JSON.stringify({
           action: "toggleTimer",
         }),
-      });
+      });*/
     },
     serverUpdate() {
-      fetch("http://localhost:3000/admin_fetch")
+      fetch("http://localhost:3000/admin/session_data")
         .then((res) => res.json())
         .then((data) => {
           if (data.ok) {
             const res = data.result;
-
-            this.kraken = res.kraken;
 
             // TODO: Refresh tables
             if (!this.dataChange) {
               this.tables = res.tables;
             }
 
-            this.participants.count = res.participants.length;
+            this.participants.count = res.users.length;
+            this.kraken = this.participants.count == 20; // res.kraken;
 
             // TODO: Refresh participants
             if (!this.dataChange) {
-              this.participants.list = res.participants;
+              this.participants.list = res.users;
             }
 
-            this.session = res.activeSession;
+            this.session = res.session.current;
 
-            this.timer.active = res.sessionStatus;
+            this.timer.active = res.session.active;
 
             const minutes =
-              res.sessionTime.m < 10
-                ? "0" + res.sessionTime.m
-                : res.sessionTime.m;
+              res.time.minutes < 10 ? "0" + res.time.minutes : res.time.minutes;
             const seconds =
-              res.sessionTime.s < 10
-                ? "0" + res.sessionTime.s
-                : res.sessionTime.s;
+              res.time.seconds < 10 ? "0" + res.time.seconds : res.time.seconds;
 
             this.timer.remaining = minutes + ":" + seconds;
           }
