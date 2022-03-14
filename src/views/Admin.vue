@@ -28,7 +28,7 @@
       <div
         @click="toggleTimer"
         class="actionBox"
-        :class="{ actionToggle: !timer.active, disabledToggle: timer.active }"
+        :class="{ actionToggle: canPlay, disabledToggle: !canPlay }"
       >
         <span>
           <h5>Start session</h5>
@@ -36,7 +36,11 @@
         ></span>
       </div>
 
-      <div @click="autoAssign" class="actionBox actionToggle">
+      <div
+        @click="autoAssign"
+        class="actionBox"
+        :class="{ actionToggle: canShuffle, disabledToggle: !canShuffle }"
+      >
         <span>
           <h5>Auto Assign</h5>
           <i class="fa fa-random icon"></i>
@@ -135,6 +139,8 @@ export default {
       cheatBoxActive: false,
       dataChange: false,
       changeTimer: null,
+      canPlay: false,
+      canShuffle: false,
       tables: [],
       participants: {
         count: 0,
@@ -252,6 +258,25 @@ export default {
               res.time.seconds < 10 ? "0" + res.time.seconds : res.time.seconds;
 
             this.timer.remaining = minutes + ":" + seconds;
+
+            const anotherSessionPossible = !(
+              res.session.current == res.session.max && res.session.completed
+            );
+
+            const unassigned = this.participants.list.filter(
+              (p) => p.table == null
+            ).length;
+
+            this.canPlay =
+              this.participants.count == 20 &&
+              unassigned == 0 &&
+              anotherSessionPossible &&
+              !this.timer.active;
+
+            this.canShuffle =
+              this.participants.count == 20 &&
+              unassigned > 0 &&
+              anotherSessionPossible;
           }
         });
     },

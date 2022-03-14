@@ -1,6 +1,6 @@
 "use strict"
 
-const { meta, users, tables } = require('../db')
+const { meta, users, tables, session } = require('../db')
 
 function autoAssign() {
     const currentParticipants = users.length
@@ -9,6 +9,10 @@ function autoAssign() {
     // Check if event has empty seats - abort
     if (currentParticipants < maxParticipants) {
         console.log(`NOTE, autoAssign(): currentParticipants (${currentParticipants}) < maxParticipants (${maxParticipants})`)
+        return false
+    }
+
+    if (session.current == session.max && session.completed) {
         return false
     }
 
