@@ -12,12 +12,14 @@ help.init()
 
 const admin = require('./routes/admin')
 const user = require('./routes/user')
+const auth = require('./routes/auth')
 
 app.use(cors())
 app.use(express.json())
 
 app.use('/admin', admin)
 app.use('/user', user)
+app.use('/auth', auth)
 
 app.get('*', (req, res) => {
     return res.json({ ok: false })
