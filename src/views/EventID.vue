@@ -27,8 +27,8 @@ export default {
     standard_button,
   },
   methods: {
-    clickAction() {
-      if (this.checkIfValidId(this.id)) {
+    async clickAction() {
+      if (await this.checkIfValidId(this.id)) {
         this.$router.push("/Loading");
       }
       this.wrongPassword = true;
@@ -42,8 +42,12 @@ export default {
       console.log(this.id.length);
       return (this.validInputData = this.id.length > 3);
     },
-    checkIfValidId(id) {
-      return id === "LOVE";
+    async checkIfValidId(id) {
+      const api = await fetch(`http://localhost:3000/auth/event_id/${id}`);
+      const r = await api.json();
+
+      return r.access;
+      //return id === "LOVE";
     },
   },
   data() {
