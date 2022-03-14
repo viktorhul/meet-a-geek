@@ -2,6 +2,12 @@ module.exports = {
     "meta": {
         // Max number of participants during event
         "maxParticipants": 20,
+        'randomPictures': [
+            'https://cdn.discordapp.com/attachments/932568365699051532/948939755712819220/unknown.png',
+            'https://cdn.discordapp.com/attachments/932568365699051532/948659091406983238/unknown.png',
+            'https://cdn.discordapp.com/attachments/932568365699051532/948579977333456918/unknown.png',
+            'https://cdn.discordapp.com/attachments/932568365699051532/948550531763290132/unknown.png'
+        ]
     },
     "users": [
         {

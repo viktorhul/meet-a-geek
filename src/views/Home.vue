@@ -30,12 +30,16 @@
         />
       </div>
       <div class="fix-padding">
-      <button class="login" @click.prevent="login" :disabled="!validInputData">
-        Log in
-      </button>
-      <button class="create" @click.prevent="$router.push('/create-account')">
-        Create account
-      </button>
+        <button
+          class="login"
+          @click.prevent="login"
+          :disabled="!validInputData"
+        >
+          Log in
+        </button>
+        <button class="create" @click.prevent="$router.push('/create-account')">
+          Create account
+        </button>
       </div>
     </form>
   </div>
@@ -61,7 +65,7 @@ export default {
         this.username.length > 0 && this.password.length > 0);
     },
     async checkCredentials() {
-      fetch("http://localhost:3000/login", {
+      fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +78,6 @@ export default {
         .then((res) => res.json())
         .then((data) => {
           if (data.access === true) {
-            console.log(data);
             this.$router.push("/eventid");
           } else {
             this.loginPending = false;
@@ -150,7 +153,7 @@ button {
   border: 0;
   border-radius: 5px;
 }
-.fix-padding{
+.fix-padding {
   padding: 0 10px;
 }
 

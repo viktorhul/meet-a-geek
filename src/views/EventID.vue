@@ -47,7 +47,6 @@ export default {
       const r = await api.json();
 
       return r.access;
-      //return id === "LOVE";
     },
   },
   data() {

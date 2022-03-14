@@ -19,8 +19,9 @@ router.get('/:id', (req, res) => {
         gender: user.gender,
         picture: user.picture,
         location: user.location,
-        tableId: user.tableId,
+        table: user.table,
         session: {
+            participantCount: db.users.length,
             active: db.session.active,
             completed: db.session.completed,
             current: db.session.current,

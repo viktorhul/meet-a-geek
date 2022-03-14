@@ -157,7 +157,7 @@
         >
         <input type="file" disabled />
       </div>
-      <div class= "button-container">
+      <div class="button-container">
         <button
           class="create"
           @click.prevent="createAccount"
@@ -296,7 +296,7 @@ export default {
       }
     },
     createAccount() {
-      fetch("http://localhost:3000/create-account", {
+      fetch("http://localhost:3000/auth/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -384,7 +384,7 @@ h1 {
 button + button {
   margin-top: 10px;
 }
-.button-container{
+.button-container {
   padding: 0 10px;
 }
 button {

@@ -1,14 +1,13 @@
 <template>
   <div class="box">
-  <div v-if="waitingForCompletion">
-    <h1>Waiting for geeks...</h1>
-    <progress :value="parts.complete" :max="parts.max"></progress>
-    <p>{{ parts.complete }} / {{ parts.max }}</p>
-  </div>
-  <div v-else>
-    <h1>All geeks are ready!</h1>
-    <p>Waiting for host to start the session...</p>
-  </div>
+    <div>
+      <h1>Waiting for geeks...</h1>
+      <progress
+        :value="participants.complete"
+        :max="participants.max"
+      ></progress>
+      <p>{{ participants.complete }} / {{ participants.max }}</p>
+    </div>
   </div>
 </template>
 
@@ -16,29 +15,34 @@
 export default {
   data() {
     return {
-      waitingForCompletion: true,
-      parts: {
+      navigated: false,
+      participants: {
         max: 20,
         complete: 1,
       },
       loadingTimer: null,
+      userId: 0,
     };
   },
   created() {
     this.loadingTimer = setInterval(() => {
       this.watchUsers();
-      if (this.parts.complete == this.parts.max) {
-        clearInterval(this.loadingTimer);
-        this.waitingForCompletion = false;
-      }
     }, 100);
   },
   methods: {
     watchUsers() {
-      fetch("http://localhost:3000/participants?count")
+      fetch(`http://localhost:3000/user/${this.userId}`)
         .then((res) => res.json())
         .then((data) => {
-          this.parts.complete = data.count;
+          if (data.ok) {
+            const res = data.result;
+            this.participants.complete = res.session.participantCount;
+
+            if (this.participants.complete == 20 && !this.navigated) {
+              this.navigated = true;
+              this.$router.push(`/datescreen/${this.userId}`);
+            }
+          }
         });
     },
   },
@@ -46,7 +50,6 @@ export default {
 </script>
 
 <style scoped>
-
 .box {
   padding-top: 50px;
 }
