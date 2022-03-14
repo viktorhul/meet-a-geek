@@ -18,7 +18,7 @@ router.post('/login', (req, res) => {
     if (!foundUser || password !== foundUser.password) {
         res.json({ access: false })
     } else {
-        res.json({ access: true })
+        res.json({ access: true, id: foundUser.id })
     }
 })
 
@@ -46,10 +46,13 @@ router.post('/create', (req, res) => {
         fullname: user.fullname,
         password: user.password,
         language: user.language,
+        gender: (user.gender == 'male') ? 'male' : 'female',
         wow: user.wow,
         picture: db.meta.randomPictures[Math.floor(Math.random() * 4)],
         table: null
     }
+
+    console.log(newUser.gender)
 
     db.users.push(newUser)
 

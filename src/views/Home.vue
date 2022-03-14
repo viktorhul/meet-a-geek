@@ -51,6 +51,7 @@ export default {
   components: {},
   data() {
     return {
+      navigated: false,
       loginPending: false,
       username: "",
       password: "",
@@ -77,8 +78,9 @@ export default {
       })
         .then((res) => res.json())
         .then((data) => {
-          if (data.access === true) {
-            this.$router.push("/eventid");
+          if (data.access === true && !this.navigated) {
+            this.navigated = true;
+            this.$router.push(`/eventid?id=${data.id}`);
           } else {
             this.loginPending = false;
             this.errorMessage = "Login credentials are incorrect";

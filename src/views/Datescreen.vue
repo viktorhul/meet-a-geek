@@ -1,49 +1,84 @@
 <template>
-<div>
-    <header class="DateHeader" @click="nextDate()">Date: {{DateNr}}</header>
-    <h1>MATCH FOUND!</h1>
-    <!-- <UserProfileMatch /> -->
-    <UserCard />
-    
-    <MoveToTable @TableClicked="startTimer()" v-if="DateRun === false"/>
-    <CountdownTimer v-else/>
-    
+  <div>
+    <header class="DateHeader" @click="nextDate()">
+      Date: {{ user.session.current }} of {{ user.session.max }}
+    </header>
 
-</div>
+    <div v-if="user.partner == null">Waiting for host...</div>
+
+    <div v-else>
+      <h1>MATCH FOUND!</h1>
+      <!-- <UserProfileMatch /> -->
+      <UserCard
+        :picture="user.partner.picture"
+        :fullname="user.partner.fullname"
+        :location="user.partner.location"
+      />
+
+      <MoveToTable :tableNumber="user.table" v-if="!user.session.active" />
+      <CountdownTimer :timeLeft="user.time" v-else />
+    </div>
+  </div>
 </template>
 
 <script>
 import MoveToTable from "@/components/MoveToTable.vue";
-import CountdownTimer from "@/components/CountdownTimer.vue"
+import CountdownTimer from "@/components/CountdownTimer.vue";
 import UserCard from "@/components/UserCard";
-export default{
-    data(){
-        return{
-            DateNr: 1,     //The index of date
-            DateRun: false  //Boolean to start timer
-        }
-    },
-    components:{
-        UserCard,
-        MoveToTable,
-        CountdownTimer,
-    },
-    methods:{
-  
-        
-        nextDate(){
-            this.DateNr += 1;
-            
+export default {
+  created() {
+    setInterval(() => {
+      this.watchUser();
+    }, 100);
+  },
+  data() {
+    return {
+      timer: {
+        active: false,
+      },
+      user: {
+        id: 0,
+        username: "",
+        fullname: "",
+        gender: "",
+        picture: "",
+        location: "",
+        table: 0,
+        session: {
+          participantCount: 0,
+          active: false,
+          completed: false,
+          current: 1,
+          max: 1,
         },
-        startTimer(){
-            this.DateRun = !this.DateRun;
-            console.log(this.DateRun);
-        }
-    }
-    
-}
+        partner: {
+          picture: "",
+          fullname: "",
+          location: "",
+        },
+        time: {
+          minutes: 0,
+          seconds: 0,
+        },
+      },
+    };
+  },
+  components: {
+    UserCard,
+    MoveToTable,
+    CountdownTimer,
+  },
+  methods: {
+    watchUser() {
+      fetch(`http://localhost:3000/user/${this.$route.query.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          this.user = data.result;
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
-    
 </style>

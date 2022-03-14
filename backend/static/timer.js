@@ -42,7 +42,7 @@ function start() {
 
         db.session.time = time
 
-    }, 10)
+    }, 500)
 
     return true
 }

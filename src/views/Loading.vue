@@ -21,7 +21,6 @@ export default {
         complete: 1,
       },
       loadingTimer: null,
-      userId: 0,
     };
   },
   created() {
@@ -31,7 +30,7 @@ export default {
   },
   methods: {
     watchUsers() {
-      fetch(`http://localhost:3000/user/${this.userId}`)
+      fetch(`http://localhost:3000/user/${this.$route.query.id}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.ok) {
@@ -40,8 +39,10 @@ export default {
 
             if (this.participants.complete == 20 && !this.navigated) {
               this.navigated = true;
-              this.$router.push(`/datescreen/${this.userId}`);
+              this.$router.push(`/datescreen?id=${this.$route.query.id}`);
             }
+          } else {
+            this.$router.push("/");
           }
         });
     },

@@ -12,6 +12,17 @@ router.get('/:id', (req, res) => {
 
     if (!user) return res.json({ ok: false })
 
+    let partnerData = null
+    if (user.table != null) {
+        const partner = db.users.find(u => u.table == user.table && u.id != user.id)
+        partnerData = (!partner) ? null : {
+            fullname: partner.fullname,
+            picture: partner.picture,
+            location: partner.location,
+        }
+    }
+
+
     const userInfo = {
         id: user.id,
         username: user.username,
@@ -27,6 +38,7 @@ router.get('/:id', (req, res) => {
             current: db.session.current,
             max: db.session.max
         },
+        partner: partnerData,
         time: {
             minutes: db.session.time.minutes,
             seconds: db.session.time.seconds

@@ -306,6 +306,7 @@ export default {
           password: this.password.value,
           fullname: this.fullname.value,
           language: this.language.value,
+          gender: this.gender.value,
           wow: this.wow.value,
         }),
       })

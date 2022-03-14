@@ -29,7 +29,7 @@ export default {
   methods: {
     async clickAction() {
       if (await this.checkIfValidId(this.id)) {
-        this.$router.push("/Loading");
+        this.$router.push(`/Loading?id=${this.$route.query.id}`);
       }
       this.wrongPassword = true;
       setTimeout(() => {
