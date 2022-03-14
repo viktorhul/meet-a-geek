@@ -69,7 +69,7 @@
       <div class="sidebar">
         <h4>Unassigned ({{ unassigned.length }})</h4>
         <center v-if="unassigned.length == 0">No unassigned geeks</center>
-        <div v-else>
+        <div class="participantsList" v-else>
           <UserCard
             v-for="p in unassigned"
             :key="p.id"
@@ -166,14 +166,12 @@ export default {
   },
   methods: {
     updateChanges() {
-      // TODO: Update API
-      fetch("http://localhost:3000/admin", {
+      fetch("http://localhost:3000/admin/update", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          action: "updateUsers",
           users: this.participants.list,
         }),
       })
@@ -189,44 +187,12 @@ export default {
     },
     autoAssign() {
       fetch("http://localhost:3000/admin/auto_assign");
-      /*fetch("http://localhost:3000/admin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          action: "autoAssign",
-        }),
-      });*/
     },
     loadRemainingParticipants() {
       fetch("http://localhost:3000/admin/add_participants");
-      /*fetch("http://localhost:3000/participants", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          action: "addRemaining",
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });*/
     },
     toggleTimer() {
       fetch("http://localhost:3000/admin/start_session");
-      /*
-      fetch("http://localhost:3000/admin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          action: "toggleTimer",
-        }),
-      });*/
     },
     serverUpdate() {
       fetch("http://localhost:3000/admin/session_data")
@@ -377,13 +343,17 @@ header .actionBox {
 
 .sidebar {
   text-align: left;
-  width: 340px;
-  height: 700px;
   background-color: #eee;
   border-right: 1px solid rgb(75, 75, 75);
   border-bottom: 1px solid rgb(75, 75, 75);
   padding: 10px;
+  width: 350px;
+}
+
+.participantsList {
   overflow-y: scroll;
+  height: 800px;
+  width: 280px;
 }
 
 .sidebar h4 {

@@ -12,7 +12,7 @@ module.exports = {
             "gender": "male",
             "picture": "https://cdn.discordapp.com/attachments/920273373240655912/948642479505281084/r5yt.png",
             "location": "Moms basement",
-            "tableId": null
+            "table": null
         }
     ],
     "tables": [],

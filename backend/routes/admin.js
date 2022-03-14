@@ -62,6 +62,27 @@ router.get('/add_participants', (req, res) => {
     return res.json({ ok: true })
 })
 
+router.post('/update', (req, res) => {
+    req.body.users.forEach(u => {
+        if (u.table == null) return;
+
+        db.users.forEach(s => {
+            if (u.id == s.id) {
+                if (s.table == u.table) return;
+
+                const t1 = db.tables.find(t => t.id == s.table)
+                const t2 = db.tables.find(t => t.id == u.table)
+
+                if (t1) t1.seats--
+                if (t2) t2.seats++
+
+                s.table = u.table
+            }
+        })
+    })
+    return res.json({ ok: true })
+})
+
 // TODO: Dev only
 router.get('/dev', (req, res) => {
     const users = db.users.map(u => u.table)
