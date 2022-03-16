@@ -56,9 +56,9 @@
         <div class="menuBox" v-if="cheatBoxActive">
           <ul>
             <li v-if="!kraken" @click="loadRemainingParticipants">
-              Release the Kraken
+              Add fake participants
             </li>
-            <li v-else>Kraken is already released</li>
+            <li @click="loadFakeReviews">Randomize geek reviews</li>
             <li>Never press this button</li>
           </ul>
         </div>
@@ -101,6 +101,7 @@
               format="small"
               :hoverable="true"
               :draggable="true"
+              :ready="tableData(table.id)[0].ready"
               :fullname="tableData(table.id)[0].fullname"
               :picture="tableData(table.id)[0].picture"
               :location="tableData(table.id)[0].location"
@@ -113,6 +114,7 @@
               format="small"
               :hoverable="true"
               :draggable="true"
+              :ready="tableData(table.id)[1].ready"
               :fullname="tableData(table.id)[1].fullname"
               :picture="tableData(table.id)[1].picture"
               :location="tableData(table.id)[1].location"
@@ -188,6 +190,9 @@ export default {
     autoAssign() {
       fetch("http://localhost:3000/admin/auto_assign");
     },
+    loadFakeReviews() {
+      fetch("http://localhost:3000/admin/auto_review");
+    },
     loadRemainingParticipants() {
       fetch("http://localhost:3000/admin/add_participants");
     },
@@ -237,7 +242,8 @@ export default {
               this.participants.count == 20 &&
               unassigned == 0 &&
               anotherSessionPossible &&
-              !this.timer.active;
+              !this.timer.active &&
+              res.session.startable;
 
             this.canShuffle =
               this.participants.count == 20 &&

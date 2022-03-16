@@ -19,7 +19,11 @@
   <div
     v-else-if="format == 'small'"
     class="card card-small"
-    :class="{ hoverable: hoverable, 'card-active': active }"
+    :class="{
+      hoverable: hoverable,
+      'card-active': active && ready,
+      'card-waiting': active && !ready,
+    }"
     :draggable="draggable"
   >
     <div class="profileContainer">
@@ -87,6 +91,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    ready: {
+      type: Boolean,
+      default: true,
+    },
   },
 };
 </script>
@@ -96,6 +104,10 @@ export default {
   /* THIS NEED TO CHANGE */
   background-color: #acb992;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-waiting {
+  background-color: rgb(204, 136, 48);
 }
 
 .card-inactive {
@@ -116,7 +128,7 @@ export default {
 
 .card-big {
   border-radius: 10px;
-  box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
 
   margin: auto;
   text-align: center;

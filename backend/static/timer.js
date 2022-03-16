@@ -1,20 +1,29 @@
 "use strict"
 
 const db = require('../db')
-const { clearTables } = require('./participants')
+const { unreadyParticipants } = require('./participants')
 
 let timer = null;
 
 function start() {
     // Make sure the session isn't already active
-    if (db.session.active == true) return false
+    if (db.session.active == true) {
+        console.log('db.session.active == true')
+        return false
+    }
 
     // Make sure everyone is assigned a table
-    const unassigned = db.users.filter(u => u.table == null).length
-    if (unassigned > 0) return false
+    const unassigned = db.users.filter(u => u.active).filter(u => u.table == null).length
+    if (unassigned > 0) {
+        console.log('unassigned > 0')
+        return false
+    }
 
     // Prevent starting more sessions than possible
-    if (db.session.current == db.session.max) return false
+    if (db.session.current == db.session.max) {
+        console.log('db.session.current == db.session.max')
+        return false
+    }
     if (db.session.completed) {
         db.session.current++
         db.session.completed = false
@@ -37,12 +46,13 @@ function start() {
             clearInterval(timer)
             db.session.active = false
             db.session.completed = true
-            clearTables()
+            //clearTables() // users leave tables when done with geek review instead
+            unreadyParticipants()
         }
 
         db.session.time = time
 
-    }, 500)
+    }, 20)
 
     return true
 }

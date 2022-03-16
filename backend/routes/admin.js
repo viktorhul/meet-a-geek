@@ -4,7 +4,7 @@ const express = require('express')
 let router = express.Router()
 
 const db = require('../db')
-const timer = require('../static/timer')
+const { start, isRunning } = require('../static/timer')
 const fake = require('../static/fake')
 const { autoAssign } = require('../static/participants')
 
@@ -18,8 +18,10 @@ router.get('/', (req, res) => {
 
 // Start next session
 router.get('/start_session', (req, res) => {
-    timer.start()
-    return res.json({ ok: true, active: timer.isRunning() })
+    if (!db.session.startable) return
+    start() // start timer
+    db.session.startable = false
+    return res.json({ ok: true, active: isRunning() })
 })
 
 // Get session data (active users, session data etc)
@@ -32,11 +34,13 @@ router.get('/session_data', (req, res) => {
                 gender: u.gender,
                 picture: u.picture,
                 location: u.location,
-                table: u.table
+                table: u.table,
+                ready: u.ready
             }
         }),
         tables: db.tables,
         session: {
+            startable: db.session.startable,
             active: db.session.active,
             completed: db.session.completed,
             current: db.session.current,
@@ -56,9 +60,17 @@ router.get('/auto_assign', (req, res) => {
     return res.json({ ok: true, assigned: autoAssign() })
 })
 
+router.get('/auto_review', (req, res) => {
+    return res.json({ ok: true, reviwed: fake.autoReview() })
+})
+
 // TODO: Not to be implemented in final product
 router.get('/add_participants', (req, res) => {
+    if (db.session.current == db.session.max) return;
+
     fake.addRemainingUsers()
+    db.session.startable = true
+
     return res.json({ ok: true })
 })
 
@@ -87,7 +99,14 @@ router.post('/update', (req, res) => {
 router.get('/dev', (req, res) => {
     const users = db.users.map(u => u.table)
     const tables = db.tables.map(t => t.seats)
-    return res.send({ users, tables })
+    //return res.send({ users, tables })
+
+
+
+    return res.send(
+        db.session.setups
+    )
+
 })
 
 module.exports = router

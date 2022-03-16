@@ -74,8 +74,13 @@ export default {
       fetch(`http://localhost:3000/user/${this.$route.query.id}`)
         .then((res) => res.json())
         .then((data) => {
+          if (!data.ok) this.$router.push("/");
           this.user = data.result;
           this.partnerFound = data.result.partner.fullname != "";
+
+          if (this.user.session.completed && !this.user.ready) {
+            this.$router.push(`/geekreview?id=${this.$route.query.id}`);
+          }
         });
     },
   },

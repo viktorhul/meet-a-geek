@@ -13,6 +13,7 @@ router.get('/event_id/:id/:user', (req, res) => {
 
         if (user) {
             user.active = true
+            user.ready = true
         }
     }
 

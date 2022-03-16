@@ -26,6 +26,7 @@ module.exports = {
     "session": {
         "code": "LOVE",
         "active": false,
+        "startable": false,
         "current": 1,
         "completed": false,
         "max": 3,
@@ -33,6 +34,7 @@ module.exports = {
             "minutes": 0,
             "seconds": 0
         },
-        "setups": []
+        "setups": [
+        ]
     }
 }

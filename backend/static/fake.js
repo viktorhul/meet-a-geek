@@ -2,6 +2,7 @@
 const fetch = require('node-fetch')
 
 const db = require('../db')
+const { clearTables } = require('./participants')
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -22,6 +23,7 @@ async function createFakeUsers(gender, amount) {
                     newId = Math.floor(Math.random() * 10000)
                     if (db.users.filter(u => u.id == newId).length == 0) break
                 }
+                console.log(`Created a user with id ${newId}`)
 
                 const person = {
                     id: newId,
@@ -34,7 +36,8 @@ async function createFakeUsers(gender, amount) {
                     picture: p.picture.large,
                     location: p.location.city + ', ' + p.location.country,
                     table: null,
-                    active: true
+                    active: true,
+                    ready: true
                 }
                 tempUsers.push(person)
             })
@@ -65,6 +68,34 @@ async function addRemainingUsers() {
     return true
 }
 
+function autoReview() {
+    db.users.filter(u => u.active).forEach(u => {
+        if (!u.ready) {
+            // user has not rated yet
+
+            const partner = db.users.find(p => p.table == u.table && p.id != u.id)
+
+            const res = {
+                p1: u.id,
+                p2: partner.id,
+                rating: Math.floor(Math.random() * 2)
+            }
+            db.session.setups.push(res)
+            u.ready = true
+
+            const unreadyUsers = db.users.filter(u => u.active).filter(u => !u.ready).length
+
+            if (!unreadyUsers) {
+                db.session.startable = true
+                clearTables()
+            }
+        }
+    })
+
+    return true
+}
+
 module.exports = {
-    addRemainingUsers
+    addRemainingUsers,
+    autoReview
 }
