@@ -36,6 +36,7 @@ router.get('/:id', (req, res) => {
         location: user.location,
         table: user.table,
         ready: user.ready,
+        setup: db.session.setups.filter(s => s.p1 == user.id),
         session: {
             participantCount: db.users.filter(u => u.active).filter(u => u.ready).length,
             active: db.session.active,

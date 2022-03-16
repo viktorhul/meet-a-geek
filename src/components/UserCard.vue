@@ -30,7 +30,10 @@
       <img :src="picture" class="avatar avatar-small" />
     </div>
     <div class="textbox">
-      <h3>{{ fullname }}</h3>
+      <h3>
+        {{ fullname }}
+        <i v-if="!ready" style="font-weight: normal"> | Waiting...</i>
+      </h3>
       <p>{{ location }}</p>
     </div>
   </div>
