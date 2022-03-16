@@ -1,5 +1,5 @@
 <template>
-  <div class="EventId">
+  <form class="EventId" @submit.prevent="clickAction">
     <h1>Lets Match</h1>
     <h3>Event ID</h3>
     <input
@@ -17,7 +17,7 @@
     <standard_button @click="clickAction" :disable="!validInputData"
       >Login</standard_button
     >
-  </div>
+  </form>
 </template>
 
 <script>
