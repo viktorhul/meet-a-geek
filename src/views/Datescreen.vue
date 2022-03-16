@@ -4,7 +4,7 @@
       Date: {{ user.session.current }} of {{ user.session.max }}
     </header>
 
-    <div v-if="user.partner == null">Waiting for host...</div>
+    <div v-if="!partnerFound">Waiting for host...</div>
 
     <div v-else>
       <h1>MATCH FOUND!</h1>
@@ -33,6 +33,7 @@ export default {
   },
   data() {
     return {
+      partnerFound: false,
       timer: {
         active: false,
       },
@@ -74,6 +75,7 @@ export default {
         .then((res) => res.json())
         .then((data) => {
           this.user = data.result;
+          this.partnerFound = data.result.partner.fullname != "";
         });
     },
   },

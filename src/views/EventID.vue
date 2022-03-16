@@ -43,7 +43,9 @@ export default {
       return (this.validInputData = this.id.length > 3);
     },
     async checkIfValidId(id) {
-      const api = await fetch(`http://localhost:3000/auth/event_id/${id}`);
+      const api = await fetch(
+        `http://localhost:3000/auth/event_id/${id}/${this.$route.query.id}`
+      );
       const r = await api.json();
 
       return r.access;

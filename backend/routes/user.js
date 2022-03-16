@@ -11,6 +11,7 @@ router.get('/:id', (req, res) => {
     const user = db.users.find(u => u.id == userId)
 
     if (!user) return res.json({ ok: false })
+    if (!user.active) return res.json({ ok: false })
 
     let partnerData = null
     if (user.table != null) {

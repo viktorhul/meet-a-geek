@@ -5,8 +5,16 @@ let router = express.Router()
 
 const db = require('../db')
 
-router.get('/event_id/:id', (req, res) => {
+router.get('/event_id/:id/:user', (req, res) => {
     const correctId = db.session.code == req.params.id
+
+    if (correctId) {
+        const user = db.users.find(u => u.id == req.params.user)
+
+        if (user) {
+            user.active = true
+        }
+    }
 
     return res.json({ ok: true, access: correctId })
 })

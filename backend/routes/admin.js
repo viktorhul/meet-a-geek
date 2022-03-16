@@ -25,7 +25,7 @@ router.get('/start_session', (req, res) => {
 // Get session data (active users, session data etc)
 router.get('/session_data', (req, res) => {
     const result = {
-        users: db.users.map(u => {
+        users: db.users.filter(u => u.active).map(u => {
             return {
                 id: u.id,
                 fullname: u.fullname,

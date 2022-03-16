@@ -33,7 +33,8 @@ async function createFakeUsers(gender, amount) {
                     participant: true,
                     picture: p.picture.large,
                     location: p.location.city + ', ' + p.location.country,
-                    table: null
+                    table: null,
+                    active: true
                 }
                 tempUsers.push(person)
             })
@@ -46,8 +47,8 @@ async function addRemainingUsers() {
 
     if (db.users.length == maxParticipants) return false
 
-    const currentMales = db.users.filter(p => p.gender === 'male').length
-    const currentFemales = db.users.filter(p => p.gender === 'female').length
+    const currentMales = db.users.filter(p => p.gender === 'male' && p.active).length
+    const currentFemales = db.users.filter(p => p.gender === 'female' && p.active).length
 
     const males = (maxParticipants / 2) - currentMales
     const females = (maxParticipants / 2) - currentFemales
