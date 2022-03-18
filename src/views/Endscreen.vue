@@ -6,7 +6,7 @@
       :key="date.id"
       v-for="date in dates"
       format="small"
-      style="width: 90%; margin: auto"
+      style="width: 85%; margin: 10px;auto"
       success="date.success"
       :fullname="date.fullname"
       :picture="date.picture"
