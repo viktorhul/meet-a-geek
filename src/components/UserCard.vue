@@ -9,11 +9,8 @@
       <img :src="picture" alt="profile pic" class="avatar avatar-big" />
     </div>
     <h2>{{ fullname }}</h2>
-    <p class="title">{{ statement }}</p>
     <h4>Location:</h4>
     <p>{{ location }}</p>
-    <h3>{{ other }}</h3>
-    <p>{{ secret }}</p>
   </div>
 
   <div
