@@ -14,7 +14,9 @@
         ></UserCard>
       </div>
       <div class="inputField">
-        <label for="meet"> Do ye wanna tap this boi/g0rl? </label>
+        <label for="meet"
+          >Do you want to share your credentials with this stranger?
+        </label>
         <select name="q1" v-model="rating">
           <option value="" disabled selected></option>
           <option value="1">Aye</option>
