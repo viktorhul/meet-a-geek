@@ -23,18 +23,17 @@ function autoAssign() {
         return false
     }
 
+    const tableCount = db.tables.length
     users.filter(u => u.active).forEach(u => {
-        if (u.table == null) {
-            const table = tables.find(t => t.seats != 2)
-            if (table.seats == 1) {
-                // TODO: Check if user has already met this person
-            }
+        let table
+        while (true) {
+            const r = Math.floor(Math.random() * tableCount + 1)
+            table = tables.find(t => t.id == r)
 
-            // TODO: Make this a heterosexual dating page as required by the product OWNeR
-
-            u.table = table.id
-            table.seats++
+            if (table.seats < 2) break
         }
+        u.table = table.id
+        table.seats++
     })
 
     return true

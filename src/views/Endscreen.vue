@@ -9,6 +9,9 @@
       style="width: 100%"
       success="date.success"
       :fullname="date.fullname"
+      :picture="date.picture"
+      :location="date.location"
+      :accepted="date.share"
     />
   </div>
 </template>
@@ -22,19 +25,40 @@ export default {
   },
   data() {
     return {
-      dates: [
-        { id: 0, fullname: "Bigboy Bengtsson", success: true },
-        { id: 1, fullname: "Jonas Björk", success: false },
-        { id: 2, fullname: "Janneman", success: true },
-      ],
+      dates: [],
     };
   },
   created() {
+    const userId = this.$route.query.id;
     fetch(`http://localhost:3000/user/${this.$route.query.id}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.ok) {
-          console.log(data.result.setup);
+          const setups = data.result.setup.map((s) => s.p2);
+          console.log(setups);
+
+          setups.forEach((s) => {
+            fetch(`http://localhost:3000/user/${s}`)
+              .then((res) => res.json())
+              .then((set) => {
+                const otherShare =
+                  set.result.setup.find((f) => f.p2 == userId).rating == 1;
+                const userShare =
+                  data.result.setup.find((f) => f.p2 == s).rating == 1;
+                const match = otherShare && userShare;
+
+                console.log(`User ${s}: ${otherShare}`);
+                console.log(`User ${data.result.id}: ${userShare}`);
+
+                const p = {
+                  fullname: set.result.fullname,
+                  picture: set.result.picture,
+                  location: set.result.location,
+                  share: match,
+                };
+                this.dates.push(p);
+              });
+          });
         }
         //this.dates = res.users;
       });

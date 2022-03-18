@@ -21,8 +21,9 @@
     class="card card-small"
     :class="{
       hoverable: hoverable,
-      'card-active': active && ready,
-      'card-waiting': active && !ready,
+      'card-active': active && ready && accepted,
+      'card-waiting': active && !ready && accepted,
+      'card-error': !accepted,
     }"
     :draggable="draggable"
   >
@@ -98,6 +99,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    accepted: {
+      type: Boolean,
+      default: true,
+    },
   },
 };
 </script>
@@ -111,6 +116,10 @@ export default {
 
 .card-waiting {
   background-color: rgb(204, 136, 48);
+}
+
+.card-error {
+  background-color: #e28080;
 }
 
 .card-inactive {
