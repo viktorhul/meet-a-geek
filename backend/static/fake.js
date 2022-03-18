@@ -20,10 +20,10 @@ async function createFakeUsers(gender, amount) {
                 // Create a unique ID and compare to registered user IDs 
                 let newId
                 while (true) {
-                    newId = Math.floor(Math.random() * 10000)
+                    newId = Math.floor(Math.random() * 1000000)
                     if (db.users.filter(u => u.id == newId).length == 0) break
                 }
-                console.log(`Created a user with id ${newId}`)
+                //console.log(`Created a user with id ${newId}`)
 
                 const person = {
                     id: newId,

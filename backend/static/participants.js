@@ -10,22 +10,31 @@ function autoAssign() {
 
     // Check if event has empty seats - abort
     if (currentParticipants < maxParticipants) {
+        console.log('currentParticipants < maxParticipants')
         return false
     }
 
     if (session.current == session.max && session.completed) {
+        console.log('session.current == session.max && session.completed')
         return false
     }
 
     // Check if everyone is already assigned a table
     const unassigned = users.filter(u => u.active).filter(u => u.table == null).length
     if (unassigned == 0) {
+        console.log('unassigned == 0')
         return false
     }
 
     const tableCount = db.tables.length
-    users.filter(u => u.active).forEach(u => {
+
+    let n = 0
+
+    users.filter(u => u.active).filter(u => u.table == null).forEach(u => {
+
         let table
+
+        console.log('n: ', n++)
         while (true) {
             const r = Math.floor(Math.random() * tableCount + 1)
             table = tables.find(t => t.id == r)
@@ -35,6 +44,8 @@ function autoAssign() {
         u.table = table.id
         table.seats++
     })
+
+    console.log(users.filter(u => u.active).map(u => u.table))
 
     return true
 }
