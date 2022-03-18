@@ -1,10 +1,9 @@
 <template>
-
   <div class="background">
     <div class="geekreview">
-    <header class="DateHeader" @click="nextDate()">
-      Date: {{ user.session.current }} of {{ user.session.max }}
-    </header>
+      <header class="DateHeader" @click="nextDate()">
+        Date: {{ user.session.current }} of {{ user.session.max }}
+      </header>
       <h1>Geek Review</h1>
       <div style="padding: 20px">
         <UserCard
@@ -14,9 +13,7 @@
         ></UserCard>
       </div>
       <div class="inputField">
-        <label for="meet"
-          >Do you want to share your credentials with this stranger?
-        </label>
+        <label for="meet">Share credentials? </label>
         <select name="q1" v-model="rating">
           <option value="" disabled selected></option>
           <option value="1">Aye</option>
@@ -167,7 +164,6 @@ export default {
 </script>
 
 <style scoped>
-
 .inputField label {
   font-size: 12pt;
   display: block;

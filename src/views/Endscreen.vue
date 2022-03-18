@@ -71,7 +71,7 @@ h1 {
   border-bottom: 2px solid #ccc;
 }
 .EventOverTitle {
-  width: 500px;
+  max-width: 500px;
   margin: auto;
   padding-top: 50px;
 }
