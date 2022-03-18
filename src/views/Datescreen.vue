@@ -14,7 +14,7 @@
         :fullname="user.partner.fullname"
         :location="user.partner.location"
       />
-
+      <br>
       <MoveToTable :tableNumber="user.table" v-if="!user.session.active" />
       <CountdownTimer :timeLeft="user.time" v-else />
     </div>
