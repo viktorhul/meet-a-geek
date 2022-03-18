@@ -112,7 +112,7 @@ export default {
 h1 {
   border-bottom: 2px solid #ccc;
 }
-
+ 
 .error {
   border: 1px solid red;
   background-color: rgb(253, 212, 212);

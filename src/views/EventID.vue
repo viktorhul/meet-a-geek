@@ -60,8 +60,12 @@ export default {
 <style scoped>
 .EventId {
   padding-top: 50px;
+  max-width: 500px;
+  margin:auto;
 }
-
+h1 {
+  border-bottom: 2px solid #ccc;
+}
 input {
   text-align: center;
   width: 4em;

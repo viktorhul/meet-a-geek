@@ -1,9 +1,9 @@
 <template>
   <div>
+
     <header class="DateHeader" @click="nextDate()">
       Date: {{ user.session.current }} of {{ user.session.max }}
     </header>
-
     <div v-if="!partnerFound">Waiting for host...</div>
 
     <div v-else>
