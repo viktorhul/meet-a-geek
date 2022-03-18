@@ -1,24 +1,5 @@
 <template>
   <div id="app">
-    <div class="dev">
-      <button class="devButton" @click="devOn = !devOn">Dev links</button>
-      <div class="devBox" v-if="devOn">
-        <h2>Bigboy Links</h2>
-        <ul>
-          <li><router-link to="/">Login</router-link></li>
-          <li><router-link to="/eventid">EventID</router-link></li>
-          <li><router-link to="/endscreen">Endscreen</router-link></li>
-          <li><router-link to="/Datescreen">Datescreen</router-link></li>
-          <li><router-link to="/Admin">Admin</router-link></li>
-          <li><router-link to="/Loading">loading</router-link></li>
-          <li>
-            <router-link to="/create-account">Create Account</router-link>
-          </li>
-          <li><router-link to=""></router-link></li>
-          <li><router-link to="geekreview">geekreview</router-link></li>
-        </ul>
-      </div>
-    </div>
     <div id="viewport">
       <router-view />
     </div>

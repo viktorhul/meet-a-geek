@@ -1,25 +1,20 @@
 # meet-a-geek
 Want to meet a geek? Look no further!
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
+# How to start
+1. Frontend
+In root folder, install packages and start Vue:
+npm i
 npm run serve
+
+2. Backend
+Move into backend directory, install packages and run node server:
+```
+cd backend
+npm i
+node server
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# How to run
+localhost:8080 (or whatever the terminal says) is the participant view
+localhost:8080/Admin is the admin view
