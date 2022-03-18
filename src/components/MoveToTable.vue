@@ -23,7 +23,7 @@ export default {
   margin: auto;
   padding: 10px;
   border-style: solid;
-  width: 15%;
+  width: 150px;
   position: relative;
 }
 .h3 {
