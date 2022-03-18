@@ -1,9 +1,9 @@
 <template>
   <div>
+
     <header class="DateHeader" @click="nextDate()">
       Date: {{ user.session.current }} of {{ user.session.max }}
     </header>
-
     <div v-if="!partnerFound">Waiting for host...</div>
 
     <div v-else>
@@ -14,7 +14,7 @@
         :fullname="user.partner.fullname"
         :location="user.partner.location"
       />
-
+      <br>
       <MoveToTable :tableNumber="user.table" v-if="!user.session.active" />
       <CountdownTimer :timeLeft="user.time" v-else />
     </div>

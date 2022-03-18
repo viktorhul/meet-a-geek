@@ -1,7 +1,11 @@
 <template>
+
   <div class="background">
     <div class="geekreview">
-      <h1 class="header">Geek Review</h1>
+    <header class="DateHeader" @click="nextDate()">
+      Date: {{ user.session.current }} of {{ user.session.max }}
+    </header>
+      <h1>Geek Review</h1>
       <div style="padding: 20px">
         <UserCard
           :fullname="user.partner.fullname"
@@ -163,10 +167,6 @@ export default {
 </script>
 
 <style scoped>
-.header {
-  font-size: 250%;
-  margin: 20px 0;
-}
 
 .inputField label {
   font-size: 12pt;
@@ -189,16 +189,6 @@ export default {
   font-size: 12pt;
 }
 
-.background {
-  padding-top: 50px;
-  margin-outside: 20px;
-  padding-bottom: 20px;
-}
-
-h1 {
-  border-bottom: 2px solid #ccc;
-  align-self: center;
-}
 button:hover,
 a:hover {
   color: red;

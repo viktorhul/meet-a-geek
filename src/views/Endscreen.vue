@@ -67,6 +67,9 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  border-bottom: 2px solid #ccc;
+}
 .EventOverTitle {
   width: 500px;
   margin: auto;
