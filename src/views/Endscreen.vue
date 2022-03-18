@@ -6,7 +6,7 @@
       :key="date.id"
       v-for="date in dates"
       format="small"
-      style="width: 85%; margin: 10px;auto"
+      style="width: 100%"
       success="date.success"
       :fullname="date.fullname"
       :picture="date.picture"
@@ -73,6 +73,7 @@ h1 {
 .EventOverTitle {
   max-width: 500px;
   margin: auto;
+  padding: 10px;
   padding-top: 50px;
 }
 </style>
