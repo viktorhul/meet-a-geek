@@ -4,6 +4,7 @@
     <h3>Event ID</h3>
     <input
       id="inputthing"
+      autocomplete="off"
       @keyup="checkLength"
       v-model="id"
       placeholder="_ _ _ _"
